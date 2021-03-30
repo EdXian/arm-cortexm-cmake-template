@@ -6,11 +6,8 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-
-
-
-
-
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake CACHE FILEPATH ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake )
+message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
 
 file(GLOB HRI_SOURCES
      "hri/*.c"
@@ -32,12 +29,9 @@ file(GLOB MAIN_SOURCES
      "*.c"
         samc21/gcc/system_samc21.c
         samc21/gcc/gcc/startup_samc21.c
-        stdio_redirect/stdio_io.c
-        stdio_redirect/read.c
-        stdio_redirect/write.c
+ 
 )
 include_directories(
-        ../
         hri
         hpl
         hal
@@ -73,7 +67,6 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
     )
 
 target_include_directories(${EXECUTABLE} PRIVATE
-        ../
         hri
         hpl
         hal
@@ -84,8 +77,9 @@ target_include_directories(${EXECUTABLE} PRIVATE
         samc21/include/instance
         samc21/include/component
         samc21/gcc/gcc
-stdio_redirect
-${CMAKE_SOURCE_DIR}
+
+        stdio_redirect
+        ${CMAKE_SOURCE_DIR}
 )
 
 
