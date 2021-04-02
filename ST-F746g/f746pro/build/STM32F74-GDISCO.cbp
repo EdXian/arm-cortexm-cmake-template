@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="STM32F74-GDISCO"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/ed/f746pro/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/ed/f746pro/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="STM32F74-GDISCO.elf">
+				<Option output="/home/ed/f746pro/build/STM32F74-GDISCO.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ed/f746pro/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F746xx"/>
+					<Add directory="/home/ed/f746pro/Core/Inc"/>
+					<Add directory="/home/ed/f746pro/Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
+					<Add directory="/home/ed/f746pro/Drivers/CMSIS/Include"/>
+					<Add directory="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Inc"/>
+					<Add directory="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"/>
+					<Add directory="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/include"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1"/>
+					<Add directory="/home/ed/f746pro/USB_HOST/App"/>
+					<Add directory="/home/ed/f746pro/USB_HOST/Target"/>
+					<Add directory="/home/ed/f746pro/FATFS/App"/>
+					<Add directory="/home/ed/f746pro/FATFS/Target"/>
+					<Add directory="/home/ed/f746pro"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 STM32F74-GDISCO.elf"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="STM32F74-GDISCO.elf/fast">
+				<Option output="/home/ed/f746pro/build/STM32F74-GDISCO.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ed/f746pro/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F746xx"/>
+					<Add directory="/home/ed/f746pro/Core/Inc"/>
+					<Add directory="/home/ed/f746pro/Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
+					<Add directory="/home/ed/f746pro/Drivers/CMSIS/Include"/>
+					<Add directory="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Inc"/>
+					<Add directory="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"/>
+					<Add directory="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/include"/>
+					<Add directory="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1"/>
+					<Add directory="/home/ed/f746pro/USB_HOST/App"/>
+					<Add directory="/home/ed/f746pro/USB_HOST/Target"/>
+					<Add directory="/home/ed/f746pro/FATFS/App"/>
+					<Add directory="/home/ed/f746pro/FATFS/Target"/>
+					<Add directory="/home/ed/f746pro"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 STM32F74-GDISCO.elf/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/ed/f746pro/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/ed/f746pro/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/ed/f746pro/Core/Src/freertos.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Core/Src/main.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Core/Src/stm32f7xx_hal_msp.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Core/Src/stm32f7xx_hal_timebase_tim.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Core/Src/stm32f7xx_it.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Core/Src/system_stm32f7xx.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_crc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_crc_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dcmi.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dcmi_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma2d.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dsi.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_eth.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_exti.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_hcd.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_qspi.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sai.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sai_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sd.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spdifrx.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_spi_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart_ex.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usb.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/App/fatfs.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/App/fatfs.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/bsp_driver_sd.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/bsp_driver_sd.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/fatfs_platform.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/fatfs_platform.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/sd_diskio.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/FATFS/Target/sd_diskio.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/diskio.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/diskio.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/ff.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/ff.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FatFs/src/option/syscall.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/croutine.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/list.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/queue.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/tasks.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/Middlewares/Third_Party/FreeRTOS/Source/timers.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/App/usb_host.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/App/usb_host.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/Target/usbh_conf.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/Target/usbh_conf.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/Target/usbh_platform.c">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/USB_HOST/Target/usbh_platform.h">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/startup_stm32f746xx.s">
+			<Option target="STM32F74-GDISCO.elf"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/ed/f746pro/arm-none-eabi-gcc.cmake">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

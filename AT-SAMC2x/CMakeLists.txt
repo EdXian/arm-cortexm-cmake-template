@@ -1,4 +1,16 @@
+
+
+
+
 cmake_minimum_required(VERSION 3.5.0)
+
+
+
+
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake CACHE FILEPATH ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake )
+message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
+
+
 project(SAMC21)
 
 enable_language(C ASM)
@@ -6,11 +18,8 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake CACHE FILEPATH ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake )
-message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
-
 file(GLOB HRI_SOURCES
-     "hri/*.c"
+     hri/*.c
      #   "hri/*.h"
 )
 
