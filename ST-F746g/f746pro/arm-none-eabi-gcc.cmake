@@ -8,6 +8,7 @@ elseif(UNIX OR APPLE)
 endif()
 
 set(TOOLCHAIN_PREFIX arm-none-eabi-)
+set(CMAKE_BUILD_TYPE "Debug")
 
 execute_process(
   COMMAND ${UTIL_SEARCH_CMD} ${TOOLCHAIN_PREFIX}gcc
@@ -15,7 +16,7 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
-get_filename_component(ARM_TOOLCHAIN_DIR ${BINUTILS_PATH} DIRECTORY)
+get_filename_component(ARM_TOOLCHAIN_DIR /home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc DIRECTORY)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}gcc)

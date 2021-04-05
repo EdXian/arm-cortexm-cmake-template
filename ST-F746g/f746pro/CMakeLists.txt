@@ -37,7 +37,7 @@ file(GLOB MIDDLE_SOURCES
      "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/*.c"
        Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c
-
+	Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/*.c
 
 
 )
@@ -66,6 +66,7 @@ add_executable(${EXECUTABLE} ${GENERATED_SOURCES_FILES})
 target_compile_definitions(${EXECUTABLE} PRIVATE
     -DUSE_HAL_DRIVER
     -DSTM32F746xx
+
 )
 
 
@@ -77,7 +78,7 @@ target_include_directories(${EXECUTABLE} PRIVATE
     Drivers/STM32F7xx_HAL_Driver/Inc
     Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
 
-
+	Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc
     Middlewares/ST/STM32_USB_Host_Library/Core/Inc
     Middlewares/Third_Party/FatFs/src
@@ -114,7 +115,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
         -Og
         #-mfpu=fpv4-sp-d16
         #-mfloat-abi=hard
-        #<$<CONFIG:Debug>:-Og>
+   
 )
 
 target_link_options(${EXECUTABLE} PRIVATE
