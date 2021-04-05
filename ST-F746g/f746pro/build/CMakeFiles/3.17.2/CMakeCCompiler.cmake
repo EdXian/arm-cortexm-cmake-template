@@ -17,11 +17,11 @@ set(CMAKE_C_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar")
+set(CMAKE_AR "/usr/bin/ar")
 set(CMAKE_C_COMPILER_AR "/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc-ar")
-set(CMAKE_RANLIB "/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib")
+set(CMAKE_RANLIB "/usr/bin/ranlib")
 set(CMAKE_C_COMPILER_RANLIB "/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc-ranlib")
-set(CMAKE_LINKER "/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ld")
+set(CMAKE_LINKER "/usr/bin/ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCC 1)
 set(CMAKE_C_COMPILER_LOADED 1)

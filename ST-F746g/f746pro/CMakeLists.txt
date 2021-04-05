@@ -28,6 +28,14 @@ file(GLOB FATFS_SOURCES
 )
 
 
+file(GLOB RTT_SOURCES
+    RTT/SEGGER/*.c
+    RTT/Sample/OS/*.c
+    RTT/Config/*.c
+    RTT/SEGGER/Syscalls/*.c
+    RTT/SEGGER/SEGGER_RTT_ASM_ARMv7M.s
+    )
+
 file(GLOB MIDDLE_SOURCES
      "Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/*.c"
      "Middlewares/ST/STM32_USB_Host_Library/Core/Src/*.c"
@@ -56,6 +64,7 @@ set(GENERATED_SOURCES_FILES
         ${MIDDLE_SOURCES}
         ${CORE_SOURCES}
         ${USBHOST_SOURCES}
+        ${RTT_SOURCES}
         startup_stm32f746xx.s
         )
 
@@ -78,7 +87,7 @@ target_include_directories(${EXECUTABLE} PRIVATE
     Drivers/STM32F7xx_HAL_Driver/Inc
     Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
 
-	Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc
     Middlewares/ST/STM32_USB_Host_Library/Core/Inc
     Middlewares/Third_Party/FatFs/src
@@ -91,8 +100,10 @@ target_include_directories(${EXECUTABLE} PRIVATE
     FATFS/App
     FATFS/Target
 
-
-
+    RTT/Config
+    RTT/SEGGER
+    RTT/Sample/OS
+    RTT/SEGGER/Syscalls
     ${CMAKE_SOURCE_DIR}
 )
 

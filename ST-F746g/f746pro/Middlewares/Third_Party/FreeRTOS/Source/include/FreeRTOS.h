@@ -47,7 +47,7 @@
  *     in FreeRTOS/source/stdint.readme for more information.
  */
 #include <stdint.h> /* READ COMMENT ABOVE. */
-
+#include "SEGGER_SYSVIEW_FreeRTOS.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -68,10 +68,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro
+CMAKE_SOURCE_DIR = /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build
+CMAKE_BINARY_DIR = /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -1061,6 +1061,141 @@ Middlewares/Third_Party/FreeRTOS/Source/timers.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.s
 .PHONY : Middlewares/Third_Party/FreeRTOS/Source/timers.c.s
 
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.obj: RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj
+
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.obj
+
+# target to build an object file
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj
+
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.i: RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.i
+
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.i
+
+# target to preprocess a source file
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.i
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.i
+
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.s: RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.s
+
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.s
+
+# target to generate assembly for a file
+RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.s
+.PHONY : RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.s
+
+RTT/SEGGER/SEGGER_RTT.obj: RTT/SEGGER/SEGGER_RTT.c.obj
+
+.PHONY : RTT/SEGGER/SEGGER_RTT.obj
+
+# target to build an object file
+RTT/SEGGER/SEGGER_RTT.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.obj
+.PHONY : RTT/SEGGER/SEGGER_RTT.c.obj
+
+RTT/SEGGER/SEGGER_RTT.i: RTT/SEGGER/SEGGER_RTT.c.i
+
+.PHONY : RTT/SEGGER/SEGGER_RTT.i
+
+# target to preprocess a source file
+RTT/SEGGER/SEGGER_RTT.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.i
+.PHONY : RTT/SEGGER/SEGGER_RTT.c.i
+
+RTT/SEGGER/SEGGER_RTT.s: RTT/SEGGER/SEGGER_RTT.c.s
+
+.PHONY : RTT/SEGGER/SEGGER_RTT.s
+
+# target to generate assembly for a file
+RTT/SEGGER/SEGGER_RTT.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.s
+.PHONY : RTT/SEGGER/SEGGER_RTT.c.s
+
+RTT/SEGGER/SEGGER_SYSVIEW.obj: RTT/SEGGER/SEGGER_SYSVIEW.c.obj
+
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.obj
+
+# target to build an object file
+RTT/SEGGER/SEGGER_SYSVIEW.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.c.obj
+
+RTT/SEGGER/SEGGER_SYSVIEW.i: RTT/SEGGER/SEGGER_SYSVIEW.c.i
+
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.i
+
+# target to preprocess a source file
+RTT/SEGGER/SEGGER_SYSVIEW.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.i
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.c.i
+
+RTT/SEGGER/SEGGER_SYSVIEW.s: RTT/SEGGER/SEGGER_SYSVIEW.c.s
+
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.s
+
+# target to generate assembly for a file
+RTT/SEGGER/SEGGER_SYSVIEW.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.s
+.PHONY : RTT/SEGGER/SEGGER_SYSVIEW.c.s
+
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.obj: RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj
+
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.obj
+
+# target to build an object file
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj
+
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.i: RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.i
+
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.i
+
+# target to preprocess a source file
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.i
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.i
+
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.s: RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.s
+
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.s
+
+# target to generate assembly for a file
+RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.s
+.PHONY : RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.s
+
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.obj: RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj
+
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.obj
+
+# target to build an object file
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj
+
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.i: RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.i
+
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.i
+
+# target to preprocess a source file
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.i
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.i
+
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.s: RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.s
+
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.s
+
+# target to generate assembly for a file
+RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/STM32F74-GDISCO.elf.dir/build.make CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.s
+.PHONY : RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.s
+
 startup_stm32f746xx.obj: startup_stm32f746xx.s.obj
 
 .PHONY : startup_stm32f746xx.obj
@@ -1181,6 +1316,21 @@ help:
 	@echo "... Middlewares/Third_Party/FreeRTOS/Source/timers.obj"
 	@echo "... Middlewares/Third_Party/FreeRTOS/Source/timers.i"
 	@echo "... Middlewares/Third_Party/FreeRTOS/Source/timers.s"
+	@echo "... RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.obj"
+	@echo "... RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.i"
+	@echo "... RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.s"
+	@echo "... RTT/SEGGER/SEGGER_RTT.obj"
+	@echo "... RTT/SEGGER/SEGGER_RTT.i"
+	@echo "... RTT/SEGGER/SEGGER_RTT.s"
+	@echo "... RTT/SEGGER/SEGGER_SYSVIEW.obj"
+	@echo "... RTT/SEGGER/SEGGER_SYSVIEW.i"
+	@echo "... RTT/SEGGER/SEGGER_SYSVIEW.s"
+	@echo "... RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.obj"
+	@echo "... RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.i"
+	@echo "... RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.s"
+	@echo "... RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.obj"
+	@echo "... RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.i"
+	@echo "... RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.s"
 	@echo "... startup_stm32f746xx.obj"
 .PHONY : help
 

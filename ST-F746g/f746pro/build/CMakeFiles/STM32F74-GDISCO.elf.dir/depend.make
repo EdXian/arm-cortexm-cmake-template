@@ -46,6 +46,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../Middlewares/Third
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/freertos.c.obj: ../Core/Src/freertos.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -93,6 +100,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Middlewares/Third_Par
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/main.c.obj: ../Core/Src/main.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Core/Src/stm32f7xx_hal_msp.c.obj: ../Core/Inc/main.h
@@ -886,6 +900,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 
@@ -899,6 +920,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/crout
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -912,6 +940,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -922,6 +957,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/list.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -933,6 +975,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/porta
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -944,6 +993,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/porta
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -957,6 +1013,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/queue.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/queue.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -969,6 +1032,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/strea
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -982,6 +1052,13 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/tasks.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
 
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../Core/Inc/FreeRTOSConfig.h
@@ -995,5 +1072,64 @@ CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timer
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 CMakeFiles/STM32F74-GDISCO.elf.dir/Middlewares/Third_Party/FreeRTOS/Source/timers.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/timers.c
+
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Core/Inc/FreeRTOSConfig.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c
+
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.obj: ../RTT/SEGGER/SEGGER_RTT.c
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_RTT.c.obj: ../RTT/SEGGER/SEGGER_RTT.h
+
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER_RTT.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.c
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/SEGGER_SYSVIEW.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_Int.h
+
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj: ../RTT/SEGGER/SEGGER_RTT.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c.obj: ../RTT/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Core/Inc/FreeRTOSConfig.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/Config/Global.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/Config/SEGGER_RTT_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/Config/SEGGER_SYSVIEW_Conf.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c
+CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj: ../RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.h
 
