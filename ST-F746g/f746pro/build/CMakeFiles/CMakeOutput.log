@@ -29,15 +29,15 @@ The CXX compiler identification is GNU, found in "/home/ed/arm-cortexm-cmake-tem
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_5586c/fast && /usr/bin/make  -f CMakeFiles/cmTC_5586c.dir/build.make CMakeFiles/cmTC_5586c.dir/build
+Run Build Command(s):/usr/bin/make cmTC_f82c2/fast && /usr/bin/make  -f CMakeFiles/cmTC_f82c2.dir/build.make CMakeFiles/cmTC_f82c2.dir/build
 make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_5586c.dir/testCCompiler.c.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -o CMakeFiles/cmTC_5586c.dir/testCCompiler.c.obj   -c /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C static library libcmTC_5586c.a
-/usr/local/bin/cmake -P CMakeFiles/cmTC_5586c.dir/cmake_clean_target.cmake
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5586c.dir/link.txt --verbose=1
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_5586c.a  CMakeFiles/cmTC_5586c.dir/testCCompiler.c.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_5586c.a
+Building C object CMakeFiles/cmTC_f82c2.dir/testCCompiler.c.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -o CMakeFiles/cmTC_f82c2.dir/testCCompiler.c.obj   -c /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C static library libcmTC_f82c2.a
+/usr/local/bin/cmake -P CMakeFiles/cmTC_f82c2.dir/cmake_clean_target.cmake
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f82c2.dir/link.txt --verbose=1
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_f82c2.a  CMakeFiles/cmTC_f82c2.dir/testCCompiler.c.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_f82c2.a
 make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
 
 
@@ -45,10 +45,10 @@ make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f6194/fast && /usr/bin/make  -f CMakeFiles/cmTC_f6194.dir/build.make CMakeFiles/cmTC_f6194.dir/build
+Run Build Command(s):/usr/bin/make cmTC_2f791/fast && /usr/bin/make  -f CMakeFiles/cmTC_2f791.dir/build.make CMakeFiles/cmTC_2f791.dir/build
 make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -v -o CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj   -c /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c
+Building C object CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -v -o CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj   -c /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc
 Target: arm-none-eabi
@@ -56,8 +56,8 @@ Configured with: /mnt/workspace/workspace/GCC-10-pipeline/jenkins-GCC-10-pipelin
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201103 (release) (GNU Arm Embedded Toolchain 10-2020-q4-major) 
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
- /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1 -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj -g -version -o /tmp/ccYxo4Ir.s
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1 -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj -g -version -o /tmp/ccGzZa5F.s
 GNU C17 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 (release) (arm-none-eabi)
 	compiled by GNU C version 4.8.4, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
 
@@ -78,17 +78,17 @@ GNU C17 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 (r
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: e9addb35ad3a920a846c18a834db924d
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
- /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj /tmp/ccYxo4Ir.s
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj /tmp/ccGzZa5F.s
 GNU assembler version 2.35.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10-2020-q4-major) 2.35.1.20201028
 COMPILER_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/
 LIBRARY_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/:/home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
-Linking C static library libcmTC_f6194.a
-/usr/local/bin/cmake -P CMakeFiles/cmTC_f6194.dir/cmake_clean_target.cmake
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6194.dir/link.txt --verbose=1
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_f6194.a  CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_f6194.a
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+Linking C static library libcmTC_2f791.a
+/usr/local/bin/cmake -P CMakeFiles/cmTC_2f791.dir/cmake_clean_target.cmake
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f791.dir/link.txt --verbose=1
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_2f791.a  CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_2f791.a
 make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
 
 
@@ -110,10 +110,10 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_f6194/fast && /usr/bin/make  -f CMakeFiles/cmTC_f6194.dir/build.make CMakeFiles/cmTC_f6194.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_2f791/fast && /usr/bin/make  -f CMakeFiles/cmTC_2f791.dir/build.make CMakeFiles/cmTC_2f791.dir/build]
   ignore line: [make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -v -o CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj   -c /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
+  ignore line: [Building C object CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc   -g   -v -o CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj   -c /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-gcc]
   ignore line: [Target: arm-none-eabi]
@@ -121,8 +121,8 @@ Parsed C implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.2.1 20201103 (release) (GNU Arm Embedded Toolchain 10-2020-q4-major) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1 -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj -g -version -o /tmp/ccYxo4Ir.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1 -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj -g -version -o /tmp/ccGzZa5F.s]
   ignore line: [GNU C17 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 4.8.4  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
   ignore line: []
@@ -143,17 +143,17 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: e9addb35ad3a920a846c18a834db924d]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj /tmp/ccYxo4Ir.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj /tmp/ccGzZa5F.s]
   ignore line: [GNU assembler version 2.35.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10-2020-q4-major) 2.35.1.20201028]
   ignore line: [COMPILER_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/:/home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [Linking C static library libcmTC_f6194.a]
-  ignore line: [/usr/local/bin/cmake -P CMakeFiles/cmTC_f6194.dir/cmake_clean_target.cmake]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6194.dir/link.txt --verbose=1]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_f6194.a  CMakeFiles/cmTC_f6194.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_f6194.a]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [Linking C static library libcmTC_2f791.a]
+  ignore line: [/usr/local/bin/cmake -P CMakeFiles/cmTC_2f791.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f791.dir/link.txt --verbose=1]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_2f791.a  CMakeFiles/cmTC_2f791.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_2f791.a]
   ignore line: [make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp']
   ignore line: []
   ignore line: []
@@ -165,15 +165,15 @@ Parsed C implicit link information from above output:
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_b56ee/fast && /usr/bin/make  -f CMakeFiles/cmTC_b56ee.dir/build.make CMakeFiles/cmTC_b56ee.dir/build
+Run Build Command(s):/usr/bin/make cmTC_64bed/fast && /usr/bin/make  -f CMakeFiles/cmTC_64bed.dir/build.make CMakeFiles/cmTC_64bed.dir/build
 make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_b56ee.dir/testCXXCompiler.cxx.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -o CMakeFiles/cmTC_b56ee.dir/testCXXCompiler.cxx.obj -c /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX static library libcmTC_b56ee.a
-/usr/local/bin/cmake -P CMakeFiles/cmTC_b56ee.dir/cmake_clean_target.cmake
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b56ee.dir/link.txt --verbose=1
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_b56ee.a  CMakeFiles/cmTC_b56ee.dir/testCXXCompiler.cxx.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_b56ee.a
+Building CXX object CMakeFiles/cmTC_64bed.dir/testCXXCompiler.cxx.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -o CMakeFiles/cmTC_64bed.dir/testCXXCompiler.cxx.obj -c /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX static library libcmTC_64bed.a
+/usr/local/bin/cmake -P CMakeFiles/cmTC_64bed.dir/cmake_clean_target.cmake
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64bed.dir/link.txt --verbose=1
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_64bed.a  CMakeFiles/cmTC_64bed.dir/testCXXCompiler.cxx.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_64bed.a
 make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
 
 
@@ -181,10 +181,10 @@ make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f0144/fast && /usr/bin/make  -f CMakeFiles/cmTC_f0144.dir/build.make CMakeFiles/cmTC_f0144.dir/build
+Run Build Command(s):/usr/bin/make cmTC_bffc7/fast && /usr/bin/make  -f CMakeFiles/cmTC_bffc7.dir/build.make CMakeFiles/cmTC_bffc7.dir/build
 make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -v -o CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
+Building CXX object CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -v -o CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++
 Target: arm-none-eabi
@@ -192,8 +192,8 @@ Configured with: /mnt/workspace/workspace/GCC-10-pipeline/jenkins-GCC-10-pipelin
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201103 (release) (GNU Arm Embedded Toolchain 10-2020-q4-major) 
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
- /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1plus -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj -g -version -o /tmp/ccW52jaz.s
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1plus -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj -g -version -o /tmp/cc37dxwO.s
 GNU C++14 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 (release) (arm-none-eabi)
 	compiled by GNU C version 4.8.4, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
 
@@ -220,17 +220,17 @@ GNU C++14 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: effb756e1d805224f46b940f18552208
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
- /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccW52jaz.s
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj /tmp/cc37dxwO.s
 GNU assembler version 2.35.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10-2020-q4-major) 2.35.1.20201028
 COMPILER_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/
 LIBRARY_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/:/home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
-Linking CXX static library libcmTC_f0144.a
-/usr/local/bin/cmake -P CMakeFiles/cmTC_f0144.dir/cmake_clean_target.cmake
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f0144.dir/link.txt --verbose=1
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_f0144.a  CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj
-/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_f0144.a
+COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t'
+Linking CXX static library libcmTC_bffc7.a
+/usr/local/bin/cmake -P CMakeFiles/cmTC_bffc7.dir/cmake_clean_target.cmake
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bffc7.dir/link.txt --verbose=1
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_bffc7.a  CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj
+/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_bffc7.a
 make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp'
 
 
@@ -258,10 +258,10 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_f0144/fast && /usr/bin/make  -f CMakeFiles/cmTC_f0144.dir/build.make CMakeFiles/cmTC_f0144.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_bffc7/fast && /usr/bin/make  -f CMakeFiles/cmTC_bffc7.dir/build.make CMakeFiles/cmTC_bffc7.dir/build]
   ignore line: [make[1]: Entering directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -v -o CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Building CXX object CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++    -g   -v -o CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-g++]
   ignore line: [Target: arm-none-eabi]
@@ -269,8 +269,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.2.1 20201103 (release) (GNU Arm Embedded Toolchain 10-2020-q4-major) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1plus -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj -g -version -o /tmp/ccW52jaz.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/cc1plus -quiet -v -iprefix /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/ -isysroot /home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -march=armv4t -auxbase-strip CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj -g -version -o /tmp/cc37dxwO.s]
   ignore line: [GNU C++14 (GNU Arm Embedded Toolchain 10-2020-q4-major) version 10.2.1 20201103 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 4.8.4  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
   ignore line: []
@@ -297,17 +297,17 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: effb756e1d805224f46b940f18552208]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccW52jaz.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [ /home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj /tmp/cc37dxwO.s]
   ignore line: [GNU assembler version 2.35.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10-2020-q4-major) 2.35.1.20201028]
   ignore line: [COMPILER_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/:/home/ed/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/:/home/ed/gcc-arm-none-eabi/bin/../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
-  ignore line: [Linking CXX static library libcmTC_f0144.a]
-  ignore line: [/usr/local/bin/cmake -P CMakeFiles/cmTC_f0144.dir/cmake_clean_target.cmake]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f0144.dir/link.txt --verbose=1]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_f0144.a  CMakeFiles/cmTC_f0144.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_f0144.a]
+  ignore line: [COLLECT_GCC_OPTIONS='-g' '-v' '-o' 'CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-march=armv4t']
+  ignore line: [Linking CXX static library libcmTC_bffc7.a]
+  ignore line: [/usr/local/bin/cmake -P CMakeFiles/cmTC_bffc7.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bffc7.dir/link.txt --verbose=1]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ar qc libcmTC_bffc7.a  CMakeFiles/cmTC_bffc7.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libcmTC_bffc7.a]
   ignore line: [make[1]: Leaving directory '/home/ed/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/CMakeTmp']
   ignore line: []
   ignore line: []
