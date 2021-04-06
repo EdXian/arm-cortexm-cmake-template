@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.15.0)
+cmake_minimum_required(VERSION 3.17.0)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake CACHE FILEPATH ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake )
 message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
@@ -71,6 +71,7 @@ set(GENERATED_SOURCES_FILES
 
 
 set(EXECUTABLE ${PROJECT_NAME}.elf)
+
 add_executable(${EXECUTABLE} ${GENERATED_SOURCES_FILES})
 target_compile_definitions(${EXECUTABLE} PRIVATE
     -DUSE_HAL_DRIVER
@@ -146,14 +147,16 @@ target_link_options(${EXECUTABLE} PRIVATE
 
 add_custom_command(TARGET ${EXECUTABLE}
         POST_BUILD
-        COMMAND /home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-size ${EXECUTABLE})
+        COMMAND arm-none-eabi-size ${EXECUTABLE}
+        )
 
 
 
 add_custom_command(TARGET ${EXECUTABLE}
         POST_BUILD
-        COMMAND /home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-objcopy -O ihex ${EXECUTABLE} ${PROJECT_NAME}.hex
-        COMMAND /home/ed/gcc-arm-none-eabi/bin/arm-none-eabi-objcopy -O binary ${EXECUTABLE} ${PROJECT_NAME}.bin)
+        COMMAND arm-none-eabi-objcopy -O ihex ${EXECUTABLE} ${PROJECT_NAME}.hex
+        COMMAND arm-none-eabi-objcopy -O binary ${EXECUTABLE} ${PROJECT_NAME}.bin
+        )
 
 
 

@@ -1,8 +1,8 @@
-# Install script for directory: /home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro
+# Install script for directory: C:/Users/Ed/Desktop/arm-cortexm-cmake-template/ST-F746g/f746pro
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/STM32F74-GDISCO")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ed/test/arm-cortexm-cmake-template/ST-F746g/f746pro/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Ed/Desktop/arm-cortexm-cmake-template/ST-F746g/f746pro/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

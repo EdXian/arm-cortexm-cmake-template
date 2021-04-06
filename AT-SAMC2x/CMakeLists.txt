@@ -66,7 +66,7 @@ set(GENERATED_SOURCES_FILES
 
 #/samc21/gcc/gcc/samc21j18a_flash.ld
 
-set(EXECUTABLE ${PROJECT_NAME}.out)
+set(EXECUTABLE ${PROJECT_NAME}.elf)
 add_executable(${EXECUTABLE} ${GENERATED_SOURCES_FILES})
 
 

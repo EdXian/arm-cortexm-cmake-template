@@ -40,6 +40,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/STM32F74-GDISCO.elf.dir/RTT/Sample/OS/SEGGER_SYSVIEW_FreeRTOS.c.obj"
   "CMakeFiles/STM32F74-GDISCO.elf.dir/startup_stm32f746xx.s.obj"
   "STM32F74-GDISCO.elf"
+  "STM32F74-GDISCO.elf.manifest"
   "STM32F74-GDISCO.elf.pdb"
 )
 
