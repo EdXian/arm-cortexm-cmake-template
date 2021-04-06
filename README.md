@@ -1,9 +1,32 @@
-## CMAKE
+# Cmake for arm-gcc
 
 
-##
+## Pre Requirement
+
+* cmake (v3.15)
+* qtcreator    (4.12)
+* GNU ARM Toolchain (10.0.1)
+* OpenOCD
+
+## Qt settings
+1. add new kit
+2. set cmake ....
+
+
+
+## Building
+1. import cmake project
+2. build (ctl + b)
+
+
+
+
+
+
+
+## windows
 ```
- cmake -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../arm-none-eabi-gcc.cmake -DCMAKE_BUILD_TYPE=Debug ..
+ cmake -G "MinGW Makefiles" ..
 ```
 
 https://blog.csdn.net/dolin_wu/article/details/108621628

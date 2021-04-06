@@ -1,3 +1,0 @@
-C:/Users/Ed/Desktop/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/STM32F74-GDISCO.elf.dir
-C:/Users/Ed/Desktop/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/edit_cache.dir
-C:/Users/Ed/Desktop/arm-cortexm-cmake-template/ST-F746g/f746pro/build/CMakeFiles/rebuild_cache.dir

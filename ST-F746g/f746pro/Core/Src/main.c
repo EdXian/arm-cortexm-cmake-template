@@ -287,7 +287,7 @@ void StartDefaultTask(void *argument)
   {
     HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
    // HAL_UART_Transmit(&huart6,"test\n",5,20);
-    HAL_UART_Transmit(&huart1,"test123\r\n",8,20);
+    HAL_UART_Transmit(&huart1,"test1234\r\n",9,20);
     osDelay(100);
   }
   /* USER CODE END 5 */
