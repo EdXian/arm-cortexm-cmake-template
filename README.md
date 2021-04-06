@@ -18,6 +18,10 @@
 1. import cmake project
 2. build (ctl + b)
 
+## Debugger
+openocd
+-f interface/stlink-v-2.1.cfg -f board/st-f4nucleo.cfg
+
 
 
 
