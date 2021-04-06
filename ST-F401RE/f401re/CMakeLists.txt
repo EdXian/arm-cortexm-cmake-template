@@ -95,11 +95,18 @@ set(GENERATED_SOURCES_FILES
 set(EXECUTABLE ${PROJECT_NAME}.elf)
 
 add_executable(${EXECUTABLE} ${GENERATED_SOURCES_FILES})
+target_link_libraries(
+    ${EXECUTABLE} Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a
+        )
 target_compile_definitions(${EXECUTABLE} PRIVATE
     -DUSE_HAL_DRIVER
     -DSTM32F401xE
-
+    -DARM_MATH_CM4
 )
+
+
+
+
 
 
 target_include_directories(${EXECUTABLE} PRIVATE
@@ -109,7 +116,8 @@ target_include_directories(${EXECUTABLE} PRIVATE
     Drivers/CMSIS/Core/Include
     Drivers/STM32F4xx_HAL_Driver/Inc
     Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
-
+    Drivers/CMSIS/Lib/GCC
+    Drivers/CMSIS/DSP/Include
     Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
     Middlewares/Third_Party/FreeRTOS/Source/include
@@ -151,10 +159,13 @@ target_link_options(${EXECUTABLE} PRIVATE
         -lc
         -lm
         -lnosys
+        #-llibarm_cortexM4lf_math
         -Wl,-Map=${PROJECT_NAME}.map,--cref
         -Wl,--gc-sections
 
         )
+
+
 
 
 add_custom_command(TARGET ${EXECUTABLE}
