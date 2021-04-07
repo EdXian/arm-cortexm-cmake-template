@@ -96,7 +96,7 @@ set(EXECUTABLE ${PROJECT_NAME}.elf)
 
 add_executable(${EXECUTABLE} ${GENERATED_SOURCES_FILES})
 target_link_libraries(
-    ${EXECUTABLE} Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a
+    ${EXECUTABLE} ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a
         )
 target_compile_definitions(${EXECUTABLE} PRIVATE
     -DUSE_HAL_DRIVER
