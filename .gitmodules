@@ -1,0 +1,9 @@
+[submodule "thirdparty/CMSIS_5"]
+	path = thirdparty/CMSIS_5
+	url = https://github.com/ARM-software/CMSIS_5.git
+[submodule "thirdparty/Eigen"]
+	path = thirdparty/Eigen
+	url = https://github.com/libigl/eigen.git
+[submodule "thirdparty/mavlink"]
+	path = thirdparty/mavlink
+	url = https://github.com/mavlink/mavlink.git

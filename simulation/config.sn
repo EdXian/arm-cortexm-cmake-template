@@ -1,0 +1,1 @@
+cmake -S . -B build -G"MinGW Makefiles" -DHOST=ON -DBUILD_ALGO_LIB=ON -DBUILD_DSP_LIB=ON
