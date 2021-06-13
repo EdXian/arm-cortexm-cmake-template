@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+63bdc6b745cb897d157f715c277ecde5 CMakeFiles/erase
+98717de4d03bafc8aa81bc9cc4847cdf CMakeFiles/reset
+d13c49cc05e9e6a5d4c093f3df3d87c9 DataLog/CMakeFiles/sensortile_flash

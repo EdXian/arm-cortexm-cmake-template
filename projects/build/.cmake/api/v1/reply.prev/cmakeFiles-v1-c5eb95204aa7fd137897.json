@@ -1,0 +1,238 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.20.3/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/arm-toolchain.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/utils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.20.3/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.20.3/CMakeASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/utils.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/jlink.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/utils.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/erase.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/reset.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/bsp.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"path" : "DataLog/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/utils.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/bsp.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/jlink.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/utils.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/erase.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/reset.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/doxygen.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindPerl.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindCygwin.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindDoxygen.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/cmake/share/cmake-3.20/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/rtthread/arm-cortexm-cmake-template/cmake/flash.in"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/home/rtthread/arm-cortexm-cmake-template/projects/build",
+		"source" : "/home/rtthread/arm-cortexm-cmake-template/projects"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
