@@ -34,6 +34,21 @@ file(GLOB SYSTEM_SOURCES
 
 )
 
+file(
+    GLOB SENSOR_TILE_SOURCE
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_env_sensors.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_env_sensors_ex.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_motion_sensors.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_motion_sensors_ex.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_sd.c
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_bus.c
+    #${BSP_ROOT_PATH}/ST/steval/Components/pcm1774/*.c
+
+
+    )
+
+
 set(ASM_SOURCE_FILE  ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32l476xx.s )
 
 message_color(Red ${PROJECT_NAME})
@@ -43,6 +58,7 @@ set( SOURCE_FILE
     ${ASM_SOURCE_FILE}
     ${SYSTEM_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/test/test.c
+    ${SENSOR_TILE_SOURCE}
     )
 
 add_executable(${PROJECT_NAME}  ${SOURCE_FILE}  )
@@ -51,11 +67,12 @@ target_include_directories(
 
 
     ${PROJECT_NAME} PUBLIC
-
+    ${BSP_ROOT_PATH}/ST/steval/SensorTile
     ${BSP_ROOT_PATH}/ST/L4/Device/ST/STM32L4xx/Include
     ${BSP_ROOT_PATH}/ST/L4/Inc
   ${BSP_ROOT_PATH}/ST/L4/Inc/Legacy
-
+  ${BSP_ROOT_PATH}/ST/steval/Components/Common/
+  ${BSP_ROOT_PATH}/ST/steval/Components/pcm1774/
   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
   ${CMSIS_PATH}
 
@@ -120,9 +137,11 @@ target_link_libraries(
 
 #include jlink for flash
 
+
+
 #generate_jlink_basic_cmd("STM32L476RG")
 generate_output_file("${PROJECT_NAME}")
-generate_jlink_cmd(${PROJECT_NAME}  "ATSAME51J20A" "${PROJECT_NAME}.bin" "0x00000000")
+generate_jlink_cmd(${PROJECT_NAME}  "STM32L476RG" "${PROJECT_NAME}.bin" "0x08000000")
 
 
 

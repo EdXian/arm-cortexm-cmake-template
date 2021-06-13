@@ -1,8 +1,0 @@
-/home/rtthread/arm-cortexm-cmake-template/projects/build/CMakeFiles/edit_cache.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/CMakeFiles/rebuild_cache.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/CMakeFiles/reset.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/CMakeFiles/erase.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/DataLog/CMakeFiles/rebuild_cache.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/DataLog/CMakeFiles/edit_cache.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/DataLog/CMakeFiles/sensortile_flash.dir
-/home/rtthread/arm-cortexm-cmake-template/projects/build/DataLog/CMakeFiles/sensortile.dir

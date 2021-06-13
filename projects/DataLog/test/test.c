@@ -2,7 +2,7 @@
 #include "stm32l4xx.h"
 #include "stm32l4xx_hal_conf.h"
 #include "stm32l4xx_hal_def.h"
-
+#include "SensorTile.h"
 
 static void Error_Handler( void );
 
@@ -88,13 +88,35 @@ static void Error_Handler( void )
 }
 
 
+void BSP_LED_Init(Led_TypeDef Led)
+{
+  GPIO_InitTypeDef  GPIO_InitStruct;
+
+  /* Enable VddIO2 for GPIOG  */
+  __HAL_RCC_PWR_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
+
+  /* Enable the GPIO_LED clock */
+  LEDx_GPIO_CLK_ENABLE(Led);
+
+  /* Configure the GPIO_LED pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+}
+
+
 
 
 int main(){
+  HAL_Init();
   SystemClock_Config();
-
+  BSP_LED_Init(0);
     while(1){
-        HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_11);
+        HAL_GPIO_TogglePin(GPIOG,GPIO_PIN_12);
         HAL_Delay(1000);
     }
 

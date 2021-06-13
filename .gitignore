@@ -1,7 +1,7 @@
 Debug/
-__pycache__
+build/
+build
 .vs/
-.idea/*
 *.o
 *.obj
 *.tmp
@@ -14,3 +14,5 @@ __pycache__
 *.xlsx
 *.dump
 *.txt.user
+
+

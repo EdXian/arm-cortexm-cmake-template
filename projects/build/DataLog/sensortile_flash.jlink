@@ -1,7 +1,0 @@
-device ATSAME51J20A
-h
-loadbin sensortile.bin, 0x00000000
-verifybin sensortile.bin, 0x00000000
-r
-g
-qc
