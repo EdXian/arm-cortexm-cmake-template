@@ -10,3 +10,6 @@
 [submodule "bootloader/uf2-bootloader"]
 	path = bootloader/uf2-bootloader
 	url = https://github.com/microsoft/uf2-samdx1.git
+[submodule "BSP/pico-sdk"]
+	path = BSP/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk

@@ -10,7 +10,7 @@ enable_language(ASM)
 
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
-generate_jlink_basic_cmd("STM32L476RG")
+#generate_jlink_basic_cmd("STM32L476RG")
 
 #set(CMAKE_PREFIX_PATH   "/opt/gcc-arm-none-eabi/arm-none-eabi")
 #set(CMAKE_INCLUDE_PATH "/opt/gcc-arm-none-eabi/arm-none-eabi/include")
@@ -21,3 +21,4 @@ generate_jlink_basic_cmd("STM32L476RG")
 
 #== generate the test executable file ==#
 add_subdirectory(${CMAKE_SOURCE_DIR}/DataLog)
+
