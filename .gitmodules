@@ -7,3 +7,6 @@
 [submodule "thirdparty/mavlink"]
 	path = thirdparty/mavlink
 	url = https://github.com/mavlink/mavlink.git
+[submodule "bootloader/uf2-bootloader"]
+	path = bootloader/uf2-bootloader
+	url = https://github.com/microsoft/uf2-samdx1.git
