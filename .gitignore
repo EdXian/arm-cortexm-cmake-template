@@ -14,5 +14,6 @@ build
 *.xlsx
 *.dump
 *.txt.user
+.vscode/
 
 

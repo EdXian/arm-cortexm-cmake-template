@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "datalog_application.h"
 #include "main.h"
-#include "usbd_cdc_interface.h"
+
 #include "string.h"
 #include "SensorTile.h"
 #include <math.h>
@@ -38,6 +38,8 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+
+//#include "usbd_cdc_interface.h"
 /* Includes ------------------------------------------------------------------*/
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,7 +105,7 @@ void DATALOG_SD_Init(void)
 uint8_t DATALOG_SD_Log_Enable(void)
 {
   static uint16_t sdcard_file_counter = 0;
-  char header[] = "T [ms],AccX [mg],AccY [mg],AccZ [mg],GyroX [mdps],GyroY [mdps],GyroZ [mdps],MagX [mgauss],MagY [mgauss],MagZ [mgauss],P [mB],T [°C],H [%]\r\n";
+  char header[] = "T [ms],AccX [mg],AccY [mg],AccZ [mg],GyroX [mdps],GyroY [mdps],GyroZ [mdps],MagX [mgauss],MagY [mgauss],MagZ [mgauss],P [mB],T [ï¿½C],H [%]\r\n";
   uint32_t byteswritten; /* written byte count */
   char file_name[30] = {0};
   

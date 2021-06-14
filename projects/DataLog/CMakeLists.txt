@@ -31,7 +31,8 @@ file(GLOB HAL_SOURCES
 
 file(GLOB SYSTEM_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/Src/system_stm32l4xx.c
-
+ # ${CMAKE_CURRENT_SOURCE_DIR}/Src/cube_hal_l4.c
+ # ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32l4xx_hal_msp.c
 )
 
 file(
@@ -44,8 +45,11 @@ file(
     ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_sd.c
     ${BSP_ROOT_PATH}/ST/steval/SensorTile/SensorTile_bus.c
     #${BSP_ROOT_PATH}/ST/steval/Components/pcm1774/*.c
-
-
+    ${BSP_ROOT_PATH}/ST/steval/Components/hts221/*.c
+    ${BSP_ROOT_PATH}/ST/steval/Components/lps22hb/*.c
+    ${BSP_ROOT_PATH}/ST/steval/Components/lsm6dsm/*.c
+    ${BSP_ROOT_PATH}/ST/steval/Components/lsm303agr/*.c
+    ${BSP_ROOT_PATH}/ST/steval/Components/stc3115/*.c
     )
 
 
@@ -53,12 +57,45 @@ set(ASM_SOURCE_FILE  ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32l476xx.s )
 
 message_color(Red ${PROJECT_NAME})
 #set(EXECUTABLE "${PROJECT_NAME}.elf")
+
+set(USB_SOURCE_FILE 
+
+
+${BSP_ROOT_PATH}/ST/usbd/Core/Src/usbd_core.c
+${BSP_ROOT_PATH}/ST/usbd/Core/Src/usbd_ctlreq.c
+${BSP_ROOT_PATH}/ST/usbd/Core/Src/usbd_ioreq.c
+
+${CMAKE_CURRENT_SOURCE_DIR}/Src/usbd_conf.c
+${CMAKE_CURRENT_SOURCE_DIR}/Src/usbd_desc.c
+${CMAKE_CURRENT_SOURCE_DIR}/Src/usbd_cdc_interface.c
+)
+
+set(FASFS_SIURCE_FILE
+
+${BSP_ROOT_PATH}/ST/FatFs/src/*.c
+
+
+)
+
+
+file(GLOB  SOURCE_FILE 
+
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/datalog_application.c
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/cube_hal_l4.c
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/sd_diskio.c
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32l4xx_hal_msp.c
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32l4xx_it.c
+#${CMAKE_CURRENT_SOURCE_DIR}/Src/syscalls.c
+)
 set( SOURCE_FILE
     ${HAL_SOURCES}
     ${ASM_SOURCE_FILE}
     ${SYSTEM_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/test/test.c
-    ${SENSOR_TILE_SOURCE}
+    
+
+    #${SENSOR_TILE_SOURCE}
+    # ${USB_SOURCE_FILE}
     )
 
 add_executable(${PROJECT_NAME}  ${SOURCE_FILE}  )
@@ -70,13 +107,30 @@ target_include_directories(
     ${BSP_ROOT_PATH}/ST/steval/SensorTile
     ${BSP_ROOT_PATH}/ST/L4/Device/ST/STM32L4xx/Include
     ${BSP_ROOT_PATH}/ST/L4/Inc
-  ${BSP_ROOT_PATH}/ST/L4/Inc/Legacy
-  ${BSP_ROOT_PATH}/ST/steval/Components/Common/
-  ${BSP_ROOT_PATH}/ST/steval/Components/pcm1774/
-  ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  ${CMSIS_PATH}
+    ${BSP_ROOT_PATH}/ST/L4/Inc/Legacy
+    ${BSP_ROOT_PATH}/ST/steval/Components/Common/
+    ${BSP_ROOT_PATH}/ST/steval/Components/pcm1774/
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${CMSIS_PATH}
+
+    ${BSP_ROOT_PATH}/ST/steval/Components/hts221/
+    ${BSP_ROOT_PATH}/ST/steval/Components/lps22hb/
+    ${BSP_ROOT_PATH}/ST/steval/Components/lsm6dsm/
+    ${BSP_ROOT_PATH}/ST/steval/Components/lsm303agr/
+    ${BSP_ROOT_PATH}/ST/steval/Components/stc3115/
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${BSP_ROOT_PATH}/ST/usbd/Core/Inc
+    ${BSP_ROOT_PATH}/ST/usbd/Class/CDC/Inc
+
+    ${BSP_ROOT_PATH}/ST/FatFs/src/
+
+
 
 )
+
+
+
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     -DDebug

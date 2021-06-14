@@ -56,16 +56,16 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "cube_hal.h"
-#include "SensorTile.h"
-#include "SensorTile_motion_sensors.h"
-#include "lsm6dsm_settings.h"
-#include "lsm303agr_settings.h"
-#include "SensorTile_env_sensors.h"
-#include "hts221_settings.h"
-#include "lps22hb_settings.h"
-#include "usbd_desc.h"
-#include "usbd_cdc.h"
-#include "usbd_cdc_interface.h"
+//#include "SensorTile.h"
+//#include "SensorTile_motion_sensors.h"
+//#include "lsm6dsm_settings.h"
+//#include "lsm303agr_settings.h"
+//#include "SensorTile_env_sensors.h"
+//#include "hts221_settings.h"
+//#include "lps22hb_settings.h"
+//#include "usbd_desc.h"
+//#include "usbd_cdc.h"
+//#include "usbd_cdc_interface.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

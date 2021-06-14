@@ -3,9 +3,13 @@
 #include "stm32l4xx_hal_conf.h"
 #include "stm32l4xx_hal_def.h"
 #include "SensorTile.h"
-
+#include "cube_hal.h"
+// #include "usbd_desc.h"
+// #include "usbd_cdc.h"
+// #include "usbd_cdc_interface.h"
+// USBD_HandleTypeDef  USBD_Device;
 static void Error_Handler( void );
-
+void BSP_LED_Init(Led_TypeDef Led);
 /**
  * @brief  System Clock Configuration
  * @param  None
@@ -86,8 +90,6 @@ static void Error_Handler( void )
   while (1)
   {}
 }
-
-
 void BSP_LED_Init(Led_TypeDef Led)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
@@ -108,16 +110,33 @@ void BSP_LED_Init(Led_TypeDef Led)
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 }
 
-
-
-
 int main(){
   HAL_Init();
   SystemClock_Config();
   BSP_LED_Init(0);
+
+  HAL_PWREx_EnableVddUSB();
+  HAL_PWREx_EnableVddIO2();
+  
+
+
+
+
+
+  // /*** USB CDC Configuration ***/
+  // /* Init Device Library */
+  // USBD_Init(&USBD_Device, &VCP_Desc, 0);
+  // /* Add Supported Class */
+  // USBD_RegisterClass(&USBD_Device, USBD_CDC_CLASS);
+  // /* Add Interface callbacks for AUDIO and CDC Class */
+  // USBD_CDC_RegisterInterface(&USBD_Device, &USBD_CDC_fops);
+  // /* Start Device Process */  
+  // USBD_Start(&USBD_Device);
+
+
     while(1){
         HAL_GPIO_TogglePin(GPIOG,GPIO_PIN_12);
-        HAL_Delay(1000);
+        HAL_Delay(200);
     }
 
 }
