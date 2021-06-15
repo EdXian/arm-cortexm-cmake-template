@@ -19,7 +19,7 @@ endif()
 
 
 include(utils)
-
+include(bsp)
 set(TOOLCHAIN_PREFIX "arm-none-eabi-")
 
 execute_process(
@@ -28,24 +28,22 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+get_filename_component(ARM_TOOLCHAIN_DIR ${BINUTILS_PATH} DIRECTORY)
 
-message_color(Green ${BINUTILS_PATH})
-get_filename_component(ARM_TOOLCHAIN_DIR ${BINUTILS_PATH} ABSOLUTE DIRECTORY)
-
-message(STATUS "here ${ARM_TOOLCHAIN_DIR}")
 set(CMAKE_PREFIX_PATH ${ARM_TOOLCHAIN_DIR})
-set(BINUTILS_PATH " C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2020-q4-major/bin")
-#message_color(Green ${CMAKE_PREFIX_PATH})
-#message_color(Green ${BINUTILS_PATH})
-#message_color(Red ${BINUTILS_PATH})
+set(BINUTILS_PATH ${ARM_TOOLCHAIN_DIR})
+message_color(Green ${CMAKE_PREFIX_PATH})
+message_color(Green ${BINUTILS_PATH})
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_OBJCOPY arm-none-eabi-objcopy CACHE INTERNAL "objcopy tool")
-set(CMAKE_SIZE arm-none-eabi-size CACHE INTERNAL "size tool")
+set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}gcc)
+set(CMAKE_ASM_COMPILER ${CMAKE_C_COMPILER})
+set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}g++)
 
+
+set(CMAKE_OBJCOPY ${ARM_TOOLCHAIN_DIR}/${TOOLCHAIN_PREFIX}objcopy CACHE INTERNAL "objcopy tool")
+set(CMAKE_SIZE ${ARM_TOOLCHAIN_DIR}/${TOOLCHAIN_PREFIX}size CACHE INTERNAL "size tool")
 
 set(CMAKE_FIND_ROOT_PATH ${BINUTILS_PATH})
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
@@ -69,12 +67,28 @@ function(generate_output_file pjt_nm)
         DEPENDS ${pjt_nm}.elf
         COMMAND ${CMAKE_OBJCOPY} -O binary ${pjt_nm}.elf ${pjt_nm}.bin
     )
-    # add_custom_command(
-    #     TARGET ${pjt_nm}
-    #     POST_BUILD  
-    #     DEPENDS ${pjt_nm}.elf
-    #     COMMAND ${CMAKE_OBJDUMP} -h -S -C ${pjt_nm}.elf > ${pjt_nm}.lst
-    # )
+    add_custom_command(
+        TARGET ${pjt_nm}
+        POST_BUILD  
+        DEPENDS ${pjt_nm}.elf
+        COMMAND ${CMAKE_OBJDUMP} -h -S -C ${pjt_nm}.elf > ${pjt_nm}.lst
+    )
     message_color(Yellow "Generate command: make ${pjt_nm}.hex make ${pjt_nm}.bin make ${pjt_nm}.lst")
 endfunction(generate_output_file)
 
+
+function(install_output_file pjt_nm ver)
+
+    install(TARGETS  ${pjt_nm}
+        DESTINATION  ${FLASH_ROOT_PATH}/${pjt_nm}_${ver}/
+    )
+    set(FLASH_RESOURCES
+        ${CMAKE_CURRENT_BINARY_DIR}/${pjt_nm}_flash.jlink
+    #    ${BSP_ROOT_PATH}/Atmel/SAME51/atmelice.bat
+    #    ${BSP_ROOT_PATH}/Atmel/SAME51/loadcode.bat
+        )
+    install(FILES ${FLASH_RESOURCES}
+        DESTINATION  ${FLASH_ROOT_PATH}/${pjt_nm}_${ver}/
+     )
+
+endfunction(install_output_file)

@@ -197,7 +197,7 @@ target_link_libraries(
 generate_output_file("${PROJECT_NAME}")
 generate_jlink_cmd(${PROJECT_NAME}  "STM32L476RG" "${PROJECT_NAME}.bin" "0x08000000")
 
-
+install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
 
 
 
