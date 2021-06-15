@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.16.0)
+include(pico_sdk_import.cmake)
 project(RP2040)
+pico_sdk_init()
+
+
+
 if (TARGET tinyusb_device)
     add_executable(hello_usb
             main.c
@@ -16,7 +21,10 @@ if (TARGET tinyusb_device)
     pico_add_extra_outputs(hello_usb)
 
     # add url via pico_set_program_url
-    example_auto_set_url(hello_usb)
+    #example_auto_set_url(hello_usb)
 elseif(PICO_ON_DEVICE)
     message(WARNING "not building hello_usb because TinyUSB submodule is not initialized in the SDK")
 endif()
+
+
+
