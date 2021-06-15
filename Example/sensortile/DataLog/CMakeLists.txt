@@ -87,12 +87,24 @@ file(GLOB  SOURCE_FILE
 #${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32l4xx_it.c
 #${CMAKE_CURRENT_SOURCE_DIR}/Src/syscalls.c
 )
+
+file( GLOB TEST_SOURCE_FILE   ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c )
+
+file(GLOB RTOS_SOURCE_FILE
+
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/*.c
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM4F/port.c
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+
+)
+
+
 set( SOURCE_FILE
     ${HAL_SOURCES}
     ${ASM_SOURCE_FILE}
     ${SYSTEM_SOURCES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/test/test.c
-    
+    ${TEST_SOURCE_FILE}
+    ${RTOS_SOURCE_FILE}
 
     #${SENSOR_TILE_SOURCE}
     # ${USB_SOURCE_FILE}
@@ -125,8 +137,11 @@ target_include_directories(
 
     ${BSP_ROOT_PATH}/ST/FatFs/src/
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/test/
 
 
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include/
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM4F/
 )
 
 
@@ -193,7 +208,7 @@ target_link_libraries(
 
 
 
-#generate_jlink_basic_cmd("STM32L476RG")
+generate_jlink_basic_cmd("STM32L476RG")
 generate_output_file("${PROJECT_NAME}")
 generate_jlink_cmd(${PROJECT_NAME}  "STM32L476RG" "${PROJECT_NAME}.bin" "0x08000000")
 
