@@ -41,14 +41,28 @@ set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}gcc)
 set(CMAKE_ASM_COMPILER ${CMAKE_C_COMPILER})
 set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}g++)
 
-
 set(CMAKE_OBJCOPY ${ARM_TOOLCHAIN_DIR}/${TOOLCHAIN_PREFIX}objcopy CACHE INTERNAL "objcopy tool")
 set(CMAKE_SIZE ${ARM_TOOLCHAIN_DIR}/${TOOLCHAIN_PREFIX}size CACHE INTERNAL "size tool")
+
+
+set(CMAKE_INSTALL_PREFIX ${FLASH_ROOT_PATH}/)
 
 set(CMAKE_FIND_ROOT_PATH ${BINUTILS_PATH})
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+
+
+option(arm-none-compile-stdlib "use stdlib" ON)
+  
+set(arm-none-compile-cpu "M4" CACHE STRING "M4")
+set(arm-none-compile-float "soft"  CACHE STRING "soft")
+set(arm-none-compile-fpu "fpv4-sp-d16" CACHE STRING "fpv4-sp-d16")
+set(arm-none-compile-instruct "-mthumb" CACHE STRING "-mthumb")
+set(arm-none-compile-optimizatopn "0" CACHE STRING "0")
+
+
 
 
 function(generate_output_file pjt_nm)
