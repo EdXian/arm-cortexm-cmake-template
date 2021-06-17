@@ -20,6 +20,7 @@ endif()
 
 include(utils)
 include(bsp)
+
 set(TOOLCHAIN_PREFIX "arm-none-eabi-")
 
 execute_process(
