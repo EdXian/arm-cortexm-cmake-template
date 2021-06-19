@@ -3,6 +3,7 @@
 #include "FreeRTOS.h"
 #include "SEGGER_RTT.h"
 #include "SEGGER_RTT_Conf.h"
+#include "uart.h"
 #define GENERIC_CLOCK_GENERATOR_MAIN      (0u)
 #define GENERIC_CLOCK_GENERATOR_XOSC32K   (1u)
 #define GENERIC_CLOCK_GENERATOR_OSCULP32K (2u) /* Initialized at reset for WDT */
@@ -17,6 +18,7 @@
 void vAssertCalled(uint8_t* file, uint8_t*  line ){
 
 }
+
 const uint8_t test_data[10]={0};
 //drive GPIO PA17
 //drive usb
@@ -248,9 +250,32 @@ void clock_source_init(void){
 	* 9) Set CPU and APBx BUS Clocks to 48MHz
 	*/
 	PM->CPUSEL.reg  = PM_CPUSEL_CPUDIV_DIV1 ;
+
 	PM->APBASEL.reg = PM_APBASEL_APBADIV_DIV1_Val ;
 	PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
 	PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
+
+    PM->APBCMASK.reg |= PM_APBCMASK_SERCOM1;
+
+    GCLK_CLKCTRL_Type clkctrl = {0};
+
+    uint16_t temp;
+    GCLK->CLKCTRL.bit.ID = GCLK_CLKCTRL_ID_SERCOM0_CORE;//inst + GCLK_ID_SERCOM0_CORE;
+    temp = GCLK->CLKCTRL.reg;
+    clkctrl.bit.CLKEN = 1;
+    clkctrl.bit.WRTLOCK = 0;
+    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
+    GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
+
+//    PM->AHBMASK.bit.DMAC_=1;
+//    PM->AHBMASK.bit.NVMCTRL_=1;
+//    PM->AHBMASK.bit.USB_=1;
+//    PM->APBAMASK.bit.GCLK_=1;
+//    PM->APBAMASK.bit.SYSCTRL_=1;
+
+
+
+
 
 	//PM->APBBMASK.bit.DMAC_= PM_CPUSEL_CPUDIV_DIV1;
 
@@ -267,6 +292,50 @@ void dma_enable(){
 
 
 
+}
+
+// SERCOM1 pa18 pad[2], pa19 pad[3]
+void uart_init(){
+
+    //gpio init
+
+    SERCOM1->USART.CTRLA.bit.ENABLE = 0;
+    while(SERCOM1->USART.CTRLA.bit.ENABLE != 0);
+    SERCOM1->USART.CTRLA.bit.SWRST = 1;
+    while(SERCOM1->USART.CTRLA.bit.ENABLE != 0);
+
+
+    while (SERCOM1->USART.SYNCBUSY.bit.ENABLE) ;
+
+    /* Disable the SERCOM UART module */
+    SERCOM1->USART.CTRLA.bit.ENABLE = 0;
+    /* Wait for synchronization */
+     while (SERCOM1->USART.SYNCBUSY.bit.SWRST) ;
+
+    /* Perform a software reset */
+    SERCOM1->USART.CTRLA.bit.SWRST = 1;
+    /* Wait for synchronization */
+    while (SERCOM1->USART.CTRLA.bit.SWRST) ;
+
+      /* Wait for synchronization */
+    while (SERCOM1->USART.SYNCBUSY.bit.SWRST || SERCOM1->USART.SYNCBUSY.bit.ENABLE)
+          ;
+      /* Update the UART pad settings, mode and data order settings */
+    SERCOM1->USART.CTRLA.reg =  SERCOM_USART_CTRLA_MODE(1) | SERCOM_USART_CTRLA_DORD;
+      /* Wait for synchronization */
+    while (SERCOM1->USART.SYNCBUSY.bit.CTRLB);
+
+      /* Enable transmit and receive and set data size to 8 bits */
+    SERCOM1->USART.CTRLB.reg = SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN | SERCOM_USART_CTRLB_CHSIZE(0);
+
+    /* Load the baud value */
+    SERCOM1->USART.BAUD.reg = 0x5555;
+    /* Wait for synchronization */
+    while (SERCOM1->USART.SYNCBUSY.bit.ENABLE) ;
+
+    /* Enable SERCOM UART */
+    SERCOM1->USART.CTRLA.bit.ENABLE = 1;
+
 
 }
 
@@ -282,11 +351,15 @@ int main(){
   NVIC_EnableIRQ(SysTick_IRQn);
   clock_source_init();
 
-  SystemCoreClock = 48000000;
-SEGGER_RTT_Init();
+  uart_get_sercom_index(SERCOM1);
 
-   REG_PORT_DIRSET0  =  PORT_PA17;
-   REG_PORT_OUTSET0 =  PORT_PA17;
+  SystemCoreClock = 48000000;
+  SEGGER_RTT_Init();
+
+  REG_PORT_DIRSET0  =  PORT_PA17;
+  REG_PORT_OUTSET0 =  PORT_PA17;
+
+  uart_basic_init(SERCOM1,9600,0);
 
 
     while(1){

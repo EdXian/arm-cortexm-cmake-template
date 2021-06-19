@@ -29,9 +29,10 @@ void OnProjectLoad (void) {
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
   Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M0.svd");
+  Project.AddSvdFile ("$(ProjectDir)/../../BSP/Atmel/SAMD21/samd21a/svd/ATSAMD21G18A.svd");
   //
   // User settings
-  //
+  //mplate\BSP\Atmel\SAMD21\samd21a\svd
   File.Open ("$(ProjectDir)/build/xiao.elf");
 }
 

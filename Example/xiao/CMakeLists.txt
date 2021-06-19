@@ -8,7 +8,6 @@ include(utils)
 include(bsp)
 include(jlink)
 include(doxygen)
-include(uf2)
 
 set(CMAKE_C_STANDARD 99)
 enable_language(ASM)
@@ -51,6 +50,7 @@ set(SOURCE_FILES
     ${STARTUP_FILE}
     ${SYSTEM_FILE}
     ${RTT_SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/uart.c
     main.c
     )
 
@@ -59,7 +59,7 @@ message_color(Red ${THIRDPARTY_ROOT_PATH})
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
@@ -130,7 +130,4 @@ generate_jlink_basic_cmd("ATSAMD21G18A")
 generate_output_file("${PROJECT_NAME}")
 generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x00002000")
 install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
-generate_uf2_file(${PROJECT_NAME} "0x00002000")
-
-
-
+#generate_uf2_file(${PROJECT_NAME} "0x00002000")
