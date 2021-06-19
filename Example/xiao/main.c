@@ -252,8 +252,23 @@ void clock_source_init(void){
 	PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
 	PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
 
+	//PM->APBBMASK.bit.DMAC_= PM_CPUSEL_CPUDIV_DIV1;
+
 } // ClockSysInit48M()
 
+
+void dma_enable(){
+  DMAC->CTRL.bit.DMAENABLE=1;
+  DMAC->CTRL.bit.CRCENABLE = 0;
+
+  DMAC->BASEADDR.reg = 0x20000000;
+  DMAC->WRBADDR.reg = 0x20001100;
+
+
+
+
+
+}
 
 
 int main(){
