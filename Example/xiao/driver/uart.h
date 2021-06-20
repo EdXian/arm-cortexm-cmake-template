@@ -8,6 +8,9 @@
 #define GCLK_ID_SERCOM0_CORE 0x14
 
 /* SERCOM UART available pad settings */
+
+//PB08 UART_Tx SCOM4PAD0
+//PB09 UART_Rx SCOM4PAD1
 enum uart_pad_settings {
     UART_RX_PAD0_TX_PAD2 = SERCOM_USART_CTRLA_RXPO(0) | SERCOM_USART_CTRLA_TXPO(1),
     UART_RX_PAD1_TX_PAD2 = SERCOM_USART_CTRLA_RXPO(1) | SERCOM_USART_CTRLA_TXPO(1),
@@ -74,5 +77,8 @@ void uart_write_buffer_polled(Sercom *sercom, uint8_t *ptr, uint16_t length);
  * \param Number of bytes to read
  */
 void uart_read_buffer_polled(Sercom *sercom, uint8_t *ptr, uint16_t length);
+
+
+void uart_clock_init(Sercom *sercom);
 
 #endif

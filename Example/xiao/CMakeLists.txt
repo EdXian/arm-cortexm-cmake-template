@@ -41,8 +41,17 @@ file(GLOB RTT_SOURCES
 
 file(GLOB FREERTOS_SOURCES
 
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
+
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/*.c
+
+    )
+
+set(DRIVE_SOURCE_FILE
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/clock.c
+    #${CMAKE_CURRENT_SOURCE_DIR}/driver/usb_cdc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/spi.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/adc.c
     )
 
 
@@ -50,12 +59,15 @@ set(SOURCE_FILES
     ${STARTUP_FILE}
     ${SYSTEM_FILE}
     ${RTT_SOURCES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/driver/uart.c
-    main.c
+    ${FREERTOS_SOURCES}
+    ${DRIVE_SOURCE_FILE}
+     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+
     )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-message_color(Red ${THIRDPARTY_ROOT_PATH})
+add_executable(${PROJECT_NAME}  main.c ${SOURCE_FILES})
+
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/

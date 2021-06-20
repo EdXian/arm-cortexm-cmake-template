@@ -1,0 +1,37 @@
+#ifndef PINCONFIG_H
+#define PINCONFIG_H
+
+
+
+// PA24  USB_D-
+// PA25  USB_D+
+
+
+//PA18 UART_Rx
+//PA19 UART_Tx
+
+//PB08 UART_Tx SCOM4PAD0
+//PB09 UART_Rx SCOM4PAD1
+
+//LED
+//PA17
+
+//PA8 I2C_SDA
+//PA9 I2C_SCL
+
+//PA4 CS
+//PA5  MISO
+//PA6  MOSI
+//PA7  SCK
+
+
+
+
+
+//Analog
+/*
+ *
+ *
+*/
+
+#endif // PINCONFIG_H

@@ -4,7 +4,7 @@
 
 ## support functions
 
-0. GCLK setting
+0. GCLK setting 48Mhz
 1. Systick
 2. FreeRTOS
 3. RTT printf/systemview
