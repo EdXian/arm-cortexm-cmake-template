@@ -4,29 +4,26 @@
 void spi_clock_init(){
     //if sercom 5
 
-    PM->APBCMASK.reg |= PM_APBCMASK_SERCOM5;
+    PM->APBCMASK.reg |= PM_APBCMASK_SERCOM0;
 
 
-    GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(SERCOM5_GCLK_ID_CORE) |
+    GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(SERCOM0_GCLK_ID_CORE) |
         GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN(0);
-    SERCOM5->SPI.CTRLA.bit.ENABLE = 0;
+    SERCOM0->SPI.CTRLA.bit.ENABLE = 0;
 
 }
 
 
 void spi_init(){
 
-    // Pre-setting Slave Select (SS) high
     PORT->Group[GPIO_GROUP_SS].OUTSET.reg = GPIO_MAP_SS;
-
-    // Setting SPI Slave Select as an output
     PORT->Group[GPIO_GROUP_SS].DIRSET.reg = GPIO_MAP_SS;
 
-
     spi_clock_init();
+    //should set DIPO DOPO
 
-    SERCOM5->SPI.CTRLA.reg = SERCOM_SPI_CTRLA_MODE_SPI_MASTER|
-        SERCOM_SPI_CTRLA_DOPO(1);
+    SERCOM0->SPI.CTRLA.reg = SERCOM_SPI_CTRLA_MODE_SPI_MASTER|SERCOM_SPI_CTRLA_DOPO(2)|SERCOM_SPI_CTRLA_DIPO(1);
+
 }
 
 void spi_interrupt_enalbe(){
@@ -47,4 +44,5 @@ SERCOM5->SPI.CTRLA.reg |= SERCOM_SPI_CTRLA_ENABLE;
 
 // What for synchronization of SERCOM SPI registersbwtween the clock domains
 while(SERCOM5->SPI.SYNCBUSY.bit.ENABLE);
+
 }

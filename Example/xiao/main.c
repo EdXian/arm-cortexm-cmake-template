@@ -119,9 +119,8 @@ int main(){
   //PB08 UART_Tx SCOM4PAD0
   //PB09 UART_Rx SCOM4PAD1
   uart_clock_init(SERCOM4);
-  uart_basic_init(SERCOM4,9600,
-                  SERCOM_USART_CTRLA_RXPO(0x1) |
-                  SERCOM_USART_CTRLA_TXPO(0x0)
+  uart_basic_init(SERCOM4,50436,
+                  UART_RX_PAD1_TX_PAD0
                   );
     //gpio_configure_pin
 

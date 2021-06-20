@@ -46,6 +46,8 @@ void clock_source_init(void){
         .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K	/* Apply division factor to Generator 1 */
     };
     // Write these settings
+    // or GCLK->GENDIV.reg = GCLK_GENDIV_ID( GENERIC_CLOCK_GENERATOR_XOSC32K ) ;
+
     GCLK->GENDIV.reg = gclk1_gendiv.reg;
 
     // Configure Generic Clock Generator 1 with XOSC32K as source
@@ -56,7 +58,7 @@ void clock_source_init(void){
         .bit.OOV = 0,			/* GCLK_IO[1] output value when generator is off */
         .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
         .bit.GENEN = 1,			/* Enable the generator */
-        .bit.SRC = 0x05,		/* Generator source: XOSC32K output */
+        .bit.SRC = GCLK_GENCTRL_SRC_XOSC32K_Val,		/* Generator source: XOSC32K output */
         .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K			/* Generator ID: 1 */
     };
     // Write these settings
@@ -115,6 +117,7 @@ void clock_source_init(void){
     SYSCTRL->DFLLVAL.bit.COARSE = tempDFLL48CalibrationCoarse;
     // Switch DFLL48M to Closed Loop mode and enable WAITLOCK
     while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+
     SYSCTRL->DFLLCTRL.reg |= (uint16_t) (SYSCTRL_DFLLCTRL_MODE | SYSCTRL_DFLLCTRL_WAITLOCK);
 
     /* ----------------------------------------------------------------------------------------------
@@ -130,7 +133,7 @@ void clock_source_init(void){
         .bit.OOV = 0,			/* GCLK_IO[0] output value when generator is off */
         .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
         .bit.GENEN = 1,			/* Enable the generator */
-        .bit.SRC = 0x07,		/* Generator source: DFLL48M output */
+        .bit.SRC = GCLK_GENCTRL_SRC_DFLL48M_Val,		/* Generator source: DFLL48M output */
         .bit.ID = GENERIC_CLOCK_GENERATOR_MAIN			/* Generator ID: 0 */
     };
     GCLK->GENCTRL.reg = gclk_genctrl0.reg;
@@ -194,15 +197,16 @@ void clock_source_init(void){
     PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
     PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
 
+
     PM->APBCMASK.reg |= PM_APBCMASK_ADC;
 
 
-    PM->APBCMASK.reg |= PM_APBCMASK_SERCOM1;
+    PM->APBCMASK.reg |= PM_APBCMASK_SERCOM4;
 
     GCLK_CLKCTRL_Type clkctrl = {0};
 
     uint16_t temp;
-    GCLK->CLKCTRL.bit.ID = GCLK_CLKCTRL_ID_SERCOM1_CORE;//inst + GCLK_ID_SERCOM0_CORE;
+    GCLK->CLKCTRL.bit.ID = GCLK_CLKCTRL_ID_SERCOM4_CORE;//inst + GCLK_ID_SERCOM0_CORE;
     temp = GCLK->CLKCTRL.reg;
     clkctrl.bit.CLKEN = 1;
     clkctrl.bit.WRTLOCK = 0;

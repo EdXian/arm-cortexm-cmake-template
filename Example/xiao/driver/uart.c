@@ -58,23 +58,31 @@ uint8_t sample_num)
 
 void uart_basic_init(Sercom *sercom, uint16_t baud_val, enum uart_pad_settings pad_conf) {
     /* Wait for synchronization */
-    while (sercom->USART.SYNCBUSY.bit.ENABLE)
-        ;
+    while (sercom->USART.SYNCBUSY.bit.ENABLE);
+
     /* Disable the SERCOM UART module */
     sercom->USART.CTRLA.bit.ENABLE = 0;
     /* Wait for synchronization */
-    while (sercom->USART.SYNCBUSY.bit.SWRST)
-        ;
+    while (sercom->USART.SYNCBUSY.bit.SWRST);
+
     /* Perform a software reset */
     sercom->USART.CTRLA.bit.SWRST = 1;
     /* Wait for synchronization */
-    while (sercom->USART.CTRLA.bit.SWRST)
-        ;
+    while (sercom->USART.CTRLA.bit.SWRST) ;
+
     /* Wait for synchronization */
     while (sercom->USART.SYNCBUSY.bit.SWRST || sercom->USART.SYNCBUSY.bit.ENABLE)
         ;
     /* Update the UART pad settings, mode and data order settings */
-    sercom->USART.CTRLA.reg = pad_conf | SERCOM_USART_CTRLA_MODE(1) | SERCOM_USART_CTRLA_DORD;
+    sercom->USART.CTRLA.reg = pad_conf |
+            SERCOM_USART_CTRLA_MODE(1) |
+            SERCOM_USART_CTRLA_DORD     |
+            SERCOM_USART_CTRLA_SAMPR(0x0)|
+            SERCOM_USART_CTRLA_RUNSTDBY |
+            SERCOM_USART_CTRLA_MODE_USART_INT_CLK ;
+
+    //
+
     /* Wait for synchronization */
     while (sercom->USART.SYNCBUSY.bit.CTRLB)
         ;
@@ -82,19 +90,20 @@ void uart_basic_init(Sercom *sercom, uint16_t baud_val, enum uart_pad_settings p
     sercom->USART.CTRLB.reg =
         SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN | SERCOM_USART_CTRLB_CHSIZE(0);
     /* Load the baud value */
-    uint32_t baud;
+    uint16_t baud;
     baud = calculate_baud_value(baud_val,48000000,USART_SAMPLE_NUM);
 
 
+    //9600
+    //(48000000/16)=3000000>=9600
 
-
-
-    sercom->USART.BAUD.reg = 9600;
+    sercom->USART.BAUD.reg = baud_val;
     /* Wait for synchronization */
     while (sercom->USART.SYNCBUSY.bit.ENABLE)
         ;
     /* Enable SERCOM UART */
     sercom->USART.CTRLA.bit.ENABLE = 1;
+    while(sercom->USART.SYNCBUSY.reg & SERCOM_USART_SYNCBUSY_ENABLE);
 }
 
 void uart_disable(Sercom *sercom) {
@@ -169,57 +178,14 @@ void uart_clock_init(Sercom *sercom){
         uint32_t port;
         uint8_t pin;
 
-        //PB08 UART_Tx SCOM4PAD0
-        //PB09 UART_Rx SCOM4PAD1
-        pin_set_peripheral_function(PINMUX_PB08D_SERCOM4_PAD0);
-        pin_set_peripheral_function(PINMUX_PB09D_SERCOM4_PAD1);
-
-//       /* Configure the port pins for SERCOM_USART */
-//       if (BOOT_USART_PAD0 != PINMUX_UNUSED) {
-//           /* Mask 6th bit in pin number to check whether it is greater than 32
-//            * i.e., PORTB pin */
-//           port = (BOOT_USART_PAD0 & 0x200000) >> 21;
-//           pin = BOOT_USART_PAD0 >> 16;
-//           PORT->Group[port].PINCFG[(pin - (port * 32))].bit.PMUXEN = 1;
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg &= ~(0xF << (4 * (pin & 0x01u)));
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg |= (BOOT_USART_PAD0 & 0xFF)
-//                                                                  << (4 * (pin & 0x01u));
-//       }
-//       if (BOOT_USART_PAD1 != PINMUX_UNUSED) {
-//           /* Mask 6th bit in pin number to check whether it is greater than 32
-//            * i.e., PORTB pin */
-//           port = (BOOT_USART_PAD1 & 0x200000) >> 21;
-//           pin = BOOT_USART_PAD1 >> 16;
-//           PORT->Group[port].PINCFG[(pin - (port * 32))].bit.PMUXEN = 1;
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg &= ~(0xF << (4 * (pin & 0x01u)));
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg |= (BOOT_USART_PAD1 & 0xFF)
-//                                                                  << (4 * (pin & 0x01u));
-//       }
-//       if (BOOT_USART_PAD2 != PINMUX_UNUSED) {
-//           /* Mask 6th bit in pin number to check whether it is greater than 32
-//            * i.e., PORTB pin */
-//           port = (BOOT_USART_PAD2 & 0x200000) >> 21;
-//           pin = BOOT_USART_PAD2 >> 16;
-//           PORT->Group[port].PINCFG[(pin - (port * 32))].bit.PMUXEN = 1;
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg &= ~(0xF << (4 * (pin & 0x01u)));
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg |= (BOOT_USART_PAD2 & 0xFF)
-//                                                                  << (4 * (pin & 0x01u));
-//       }
-//       if (BOOT_USART_PAD3 != PINMUX_UNUSED) {
-//           /* Mask 6th bit in pin number to check whether it is greater than 32
-//            * i.e., PORTB pin */
-//           port = (BOOT_USART_PAD3 & 0x200000) >> 21;
-//           pin = BOOT_USART_PAD3 >> 16;
-//           PORT->Group[port].PINCFG[(pin - (port * 32))].bit.PMUXEN = 1;
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg &= ~(0xF << (4 * (pin & 0x01u)));
-//           PORT->Group[port].PMUX[(pin - (port * 32)) / 2].reg |= (BOOT_USART_PAD3 & 0xFF)
-//                                                                  << (4 * (pin & 0x01u));
-//       }
-
-
+    //PB08 UART_Tx SCOM4PAD0
+    //PB09 UART_Rx SCOM4PAD1
+    pin_set_peripheral_function(PINMUX_PB08D_SERCOM4_PAD0);
+    pin_set_peripheral_function(PINMUX_PB09D_SERCOM4_PAD1);
 
     uint32_t inst = uart_get_sercom_index(sercom);
     /* Enable clock for BOOT_USART_MODULE */
+    PM->APBCSEL.bit.APBCDIV = 0;       //no presescaler
     PM->APBCMASK.reg |= (1u << (inst + PM_APBCMASK_SERCOM0_Pos));
 
     /* Set GCLK_GEN0 as source for GCLK_ID_SERCOMx_CORE */
@@ -229,6 +195,8 @@ void uart_clock_init(Sercom *sercom){
     temp = GCLK->CLKCTRL.reg;
     clkctrl.bit.CLKEN = true;
     clkctrl.bit.WRTLOCK = false;
-    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
+    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK3_Val;
     GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
+
+
 }
