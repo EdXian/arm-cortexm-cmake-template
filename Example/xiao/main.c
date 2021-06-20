@@ -60,9 +60,6 @@ void dma_enable(){
 
 // SERCOM1 pa18 pad[2], pa19 pad[3]
 
-void SERCOM1_Handler(void){
-    asm("nop");
-}
 
 //void vApplicationTickHook( void ){
 
@@ -96,20 +93,31 @@ void led_task(void *p){
         vTaskDelay(200);
     }
 }
+void SERCOM4_Handler(void){
 
+   	if (SERCOM4->USART.INTFLAG.bit.RXC)
+	{
+		// Got a character
+        uint16_t rxData = SERCOM4->USART.DATA.reg;
+		return;
+	}
 
+}
 TaskHandle_t xHandle = NULL;
 
 int main(){
 
 
   Systick_init();
+  NVIC_EnableIRQ(SERCOM4_IRQn);
+  NVIC_SetPriority(SERCOM4_IRQn,4);
+
   clock_source_init();
 
   //spi_init();
   //spi_set_baudrate(500);
   gpio_init();
-  NVIC_EnableIRQ(SERCOM1_IRQn);
+
   adc_clok_init();
 
   SEGGER_RTT_Init();
