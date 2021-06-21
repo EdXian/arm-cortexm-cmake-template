@@ -53,6 +53,7 @@ set(DRIVE_SOURCE_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/spi.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/adc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/dma.c
+     ${CMAKE_CURRENT_SOURCE_DIR}/driver/i2c.c
     )
 
 
