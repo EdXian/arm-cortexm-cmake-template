@@ -13,3 +13,6 @@
 [submodule "BSP/pico-sdk"]
 	path = BSP/pico-sdk
 	url = https://github.com/raspberrypi/pico-sdk
+[submodule "components/stmems"]
+	path = components/stmems
+	url = https://github.com/STMicroelectronics/STMems_Standard_C_drivers
