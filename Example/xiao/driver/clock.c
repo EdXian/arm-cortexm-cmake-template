@@ -197,10 +197,10 @@ void clock_source_init(void){
     PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
     PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
 
+/*
+
 
     PM->APBCMASK.reg |= PM_APBCMASK_ADC;
-
-
     PM->APBCMASK.reg |= PM_APBCMASK_SERCOM4;
 
     GCLK_CLKCTRL_Type clkctrl = {0};
@@ -213,14 +213,14 @@ void clock_source_init(void){
     clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
     GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
 
-//    PM->AHBMASK.bit.DMAC_=1;
-//    PM->AHBMASK.bit.NVMCTRL_=1;
-//    PM->AHBMASK.bit.USB_=1;
-//    PM->APBAMASK.bit.GCLK_=1;
-//    PM->APBAMASK.bit.SYSCTRL_=1;
+    PM->AHBMASK.bit.DMAC_=1;
+    PM->AHBMASK.bit.NVMCTRL_=1;
+    PM->AHBMASK.bit.USB_=1;
+    PM->APBAMASK.bit.GCLK_=1;
+    PM->APBAMASK.bit.SYSCTRL_=1;
 
 
-
+*/
 
 
     //PM->APBBMASK.bit.DMAC_= PM_CPUSEL_CPUDIV_DIV1;

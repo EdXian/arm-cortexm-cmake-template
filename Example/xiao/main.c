@@ -69,14 +69,17 @@ void dma_enable(){
 
 //}
 
-void Systick_init(){
+void Sys_init(){
     SysTick->CTRL = 0;
     SysTick->LOAD = 48000-1;
-    NVIC_SetPriority(SysTick_IRQn, 3);
+
     SysTick->VAL = 0;
     SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Pos | SysTick_CTRL_TICKINT_Pos | SysTick_CTRL_ENABLE_Pos;
-    NVIC_EnableIRQ(SysTick_IRQn);
+
     SystemCoreClock = 48000000;
+
+    NVIC_SetPriority(SysTick_IRQn, 3);
+    NVIC_EnableIRQ(SysTick_IRQn);
 }
 
 void led_task(void *p){
@@ -108,19 +111,22 @@ TaskHandle_t xHandle = NULL;
 int main(){
 
 
-  Systick_init();
-  NVIC_EnableIRQ(SERCOM4_IRQn);
-  NVIC_SetPriority(SERCOM4_IRQn,4);
+
+
+
+   
 
   clock_source_init();
-
+    Sys_init();    // systick init should be later than clocksource init
+  NVIC_EnableIRQ(SERCOM4_IRQn);
+  NVIC_SetPriority(SERCOM4_IRQn,4);
   //spi_init();
   //spi_set_baudrate(500);
   gpio_init();
 
   adc_clok_init();
 
-  SEGGER_RTT_Init();
+//  SEGGER_RTT_Init();
 
 
 
@@ -145,6 +151,9 @@ int main(){
 
     vTaskStartScheduler();
     while(1){
-
+        for(int i=0;i<1000000;i++){
+            asm("nop");
+        }
+        togle_pin();
     }
 }
