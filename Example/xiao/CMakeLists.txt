@@ -52,6 +52,7 @@ set(DRIVE_SOURCE_FILE
     #${CMAKE_CURRENT_SOURCE_DIR}/driver/usb_cdc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/spi.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/adc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/dma.c
     )
 
 

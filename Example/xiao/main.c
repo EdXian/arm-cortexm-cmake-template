@@ -4,12 +4,13 @@
 #include "SEGGER_RTT.h"
 #include "SEGGER_RTT_Conf.h"
 #include "task.h"
-
+#include "dma.h"
 #include "uart.h"
 #include "spi.h"
 #include "clock.h"
 #include "adc.h"
 #include "pinconfig.h"
+#include "spi.h"
 void vAssertCalled(uint8_t* file, uint8_t*  line ){
 
 }
@@ -46,17 +47,7 @@ void gpio_init(){
 }
 
 
-void dma_enable(){
-  DMAC->CTRL.bit.DMAENABLE=1;
-  DMAC->CTRL.bit.CRCENABLE = 0;
 
-  DMAC->BASEADDR.reg = 0x20000000;
-  DMAC->WRBADDR.reg = 0x20001100;
-
-
-
-
-}
 
 // SERCOM1 pa18 pad[2], pa19 pad[3]
 
@@ -86,14 +77,15 @@ void led_task(void *p){
     uint16_t adc_val;
     while(1){
         togle_pin();
-        uart_write_byte(SERCOM4,'a');
-        asm("nop");
-        uart_write_byte(SERCOM4,'b');
-        asm("nop");
-        uart_write_byte(SERCOM4,'c');
-        asm("nop");
+//        uart_write_byte(SERCOM4,'a');
+//        asm("nop");
+//        uart_write_byte(SERCOM4,'b');
+//        asm("nop");
+//        uart_write_byte(SERCOM4,'c');
+//        asm("nop");
+        spiSend(0x66);
         adc_val = adc_read();
-        vTaskDelay(200);
+        vTaskDelay(20);
     }
 }
 void SERCOM4_Handler(void){
@@ -117,17 +109,17 @@ int main(){
    
 
   clock_source_init();
-    Sys_init();    // systick init should be later than clocksource init
+  Sys_init();    // systick init should be later than clocksource init
   NVIC_EnableIRQ(SERCOM4_IRQn);
   NVIC_SetPriority(SERCOM4_IRQn,4);
   //spi_init();
   //spi_set_baudrate(500);
   gpio_init();
-
+    spi_init();
   adc_clok_init();
 
 //  SEGGER_RTT_Init();
-
+    dma_enable();
 
 
   //PB08 UART_Tx SCOM4PAD0

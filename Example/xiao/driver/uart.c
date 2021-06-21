@@ -188,7 +188,7 @@ void uart_clock_init(Sercom *sercom){
     PM->APBCSEL.bit.APBCDIV = 0;       //no presescaler
     PM->APBCMASK.reg |= (1u << (inst + PM_APBCMASK_SERCOM0_Pos));
 
-    /* Set GCLK_GEN0 as source for GCLK_ID_SERCOMx_CORE */
+    /* Set GCLK_GEN3 as source for GCLK_ID_SERCOMx_CORE */
     GCLK_CLKCTRL_Type clkctrl = {0};
     uint16_t temp;
     GCLK->CLKCTRL.bit.ID = inst + GCLK_ID_SERCOM0_CORE;
