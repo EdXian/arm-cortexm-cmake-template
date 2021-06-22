@@ -38,7 +38,8 @@ message_color(Red ${PROJECT_NAME})
 
 if(USE_TINYUSB)
     set(TINYUSB_PATH  ${THIRDPARTY_ROOT_PATH}/tinyusb)
-    file(GLOB TINYUSB_CLASS_SOURCES ${TINYUSB_PATH}/src/class/cdc/*.c)
+    file(GLOB TINYUSB_CDC_SOURCES ${TINYUSB_PATH}/src/class/cdc/*.c)
+    file(GLOB TINYUSB_MSC_SOURCES ${TINYUSB_PATH}/src/class/msc/*.c)
     file(GLOB TINYUSB_COMMON_SOURCES ${TINYUSB_PATH}/src/common/*.c)
     file(GLOB TINYUSB_DEVICE_SOURCES ${TINYUSB_PATH}/src/device/*.c)
     set(TINYUSB_PORTABLE_SOURCES ${TINYUSB_PATH}/src/portable/microchip/samd/dcd_samd.c)
@@ -46,7 +47,8 @@ if(USE_TINYUSB)
     set(TINYUSB_INCLUDE_PATH  ${TINYUSB_PATH}/src)
 
     set(TINYUSB_SOURCES
-        ${TINYUSB_CLASS_SOURCES}
+        ${TINYUSB_CDC_SOURCES}
+        ${TINYUSB_MSC_SOURCES}
         ${TINYUSB_COMMON_SOURCES}
         ${TINYUSB_DEVICE_SOURCES}
         ${TINYUSB_PORTABLE_SOURCES}
@@ -160,7 +162,7 @@ target_compile_options(project_lib PRIVATE
 
 
 
-add_executable(${PROJECT_NAME}  main.c freertos_hook.c  usb_descriptor.c ${SOURCE_FILES})
+add_executable(${PROJECT_NAME}  main.c freertos_hook.c msc_disk.c usb_descriptor.c ${SOURCE_FILES})
 
 
 
