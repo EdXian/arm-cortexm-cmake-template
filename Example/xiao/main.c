@@ -85,7 +85,7 @@ void led_task(void *p){
 //        asm("nop");
         spiSend(0x66);
         adc_val = adc_read();
-        vTaskDelay(20);
+        vTaskDelay(100);
     }
 }
 void SERCOM4_Handler(void){

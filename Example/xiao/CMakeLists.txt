@@ -65,13 +65,9 @@ set(SOURCE_FILES
     ${DRIVE_SOURCE_FILE}
      ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
-
     )
 
-add_executable(${PROJECT_NAME}  main.c ${SOURCE_FILES})
-
-target_include_directories(
-    ${PROJECT_NAME} PUBLIC
+set(DEPEN_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
@@ -86,15 +82,9 @@ target_include_directories(
     ${BSP_PATH}/include/pio
     ${BSP_PATH}/include/component
     ${BSP_PATH}/include/instance
-)
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC
-        -DDEBUG
-        -D__SAMD21G18A__
+
     )
-
-
-# set CMAKE_C_FLAGS
 
 set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g ) #-mfloat-abi=soft -mfpu=fpv4-sp-d16
 set(DEBUG_FLAGS 3)
@@ -125,6 +115,44 @@ set(LDFLAGS
     -Wl,--gc-sections
 )
 
+add_library(project_lib STATIC ${SOURCE_FILES})
+target_include_directories(
+    project_lib PRIVATE
+    ${DEPEN_DIR}
+)
+target_compile_definitions(project_lib PRIVATE
+        -DDEBUG
+        -D__SAMD21G18A__
+    )
+target_link_libraries(project_lib PRIVATE
+    m
+    )
+
+target_compile_options(project_lib PRIVATE
+    ${CFLAGS}
+)
+
+
+
+add_executable(${PROJECT_NAME}  main.c ${SOURCE_FILES})
+
+
+
+target_include_directories(
+    ${PROJECT_NAME} PUBLIC
+    ${DEPEN_DIR}
+)
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+        -DDEBUG
+        -D__SAMD21G18A__
+    )
+
+
+# set CMAKE_C_FLAGS
+
+
+
 
 target_compile_options(${PROJECT_NAME} PUBLIC
     ${CFLAGS}
@@ -134,14 +162,19 @@ target_compile_options(${PROJECT_NAME} PUBLIC
 
 target_link_options(${PROJECT_NAME} PUBLIC
          ${LDFLAGS}
+
 )
 
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
 )
 
+#set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/main")
 generate_jlink_basic_cmd("ATSAMD21G18A")
 generate_output_file("${PROJECT_NAME}")
-generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x00002000")
+generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x00000000")
 install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
-#generate_uf2_file(${PROJECT_NAME} "0x00002000")
+#generate_uf2_file(${PROJECT_NAME} "0x00000000")
+
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example )
