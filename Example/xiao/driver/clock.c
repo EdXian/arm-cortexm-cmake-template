@@ -197,6 +197,20 @@ void clock_source_init(void){
     PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
     PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
 
+    PM->AHBMASK.bit.USB_=1;
+
+    PM->APBBMASK.bit.USB_ = 1;
+
+
+    GCLK_CLKCTRL_Type clkctrl = {0};
+    uint16_t temp;
+    GCLK->CLKCTRL.bit.ID =  USB_GCLK_ID;
+    temp = GCLK->CLKCTRL.reg;
+    clkctrl.bit.CLKEN = 1;
+    clkctrl.bit.WRTLOCK = 0;
+    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;     // usb 48MHz
+    GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
+
 /*
 
 

@@ -11,6 +11,9 @@
 #include "adc.h"
 #include "pinconfig.h"
 #include "spi.h"
+#include "tusb_config.h"
+#include "tusb.h"
+
 void vAssertCalled(uint8_t* file, uint8_t*  line ){
 
 }
@@ -49,6 +52,12 @@ void gpio_init(){
 
 
 
+void USB_Handler(){
+
+
+    tud_int_handler(0);
+}
+
 // SERCOM1 pa18 pad[2], pa19 pad[3]
 
 
@@ -83,8 +92,8 @@ void led_task(void *p){
 //        asm("nop");
 //        uart_write_byte(SERCOM4,'c');
 //        asm("nop");
-        spiSend(0x66);
-        adc_val = adc_read();
+//        spiSend(0x66);
+//        adc_val = adc_read();
         vTaskDelay(100);
     }
 }
@@ -100,38 +109,79 @@ void SERCOM4_Handler(void){
 }
 TaskHandle_t xHandle = NULL;
 
+
+static inline void pin_set_peripheral_function(uint32_t pinmux)
+{
+    uint8_t port = (uint8_t)((pinmux >> 16)/32);
+    PORT->Group[port].PINCFG[((pinmux >> 16) - (port*32))].bit.PMUXEN = 1;
+    PORT->Group[port].PMUX[((pinmux >> 16) - (port*32))/2].reg &= ~(0xF << (4 * ((pinmux >>
+    16) & 0x01u)));
+    PORT->Group[port].PMUX[((pinmux >> 16) - (port*32))/2].reg |= (uint8_t)((pinmux &
+    0x0000FFFF) << (4 * ((pinmux >> 16) & 0x01u)));
+}
+
+
+void usb_port_init(){
+ //   REG_PORT_DIRSET0  |=  PORT_PA17;
+//    REG_PORT_OUTSET0 |=  PORT_PA17;
+
+    REG_PORT_DIRSET0 |= PORT_PA24;
+    REG_PORT_OUTSET0 &= ~(PORT_PA24);
+
+
+    REG_PORT_DIRSET0 |= PORT_PA25;
+    REG_PORT_OUTSET0 &= ~(PORT_PA25);
+/*
+  gpio_set_pin_direction(PIN_PA24, GPIO_DIRECTION_OUT);
+  gpio_set_pin_level(PIN_PA24, false);
+  gpio_set_pin_pull_mode(PIN_PA24, GPIO_PULL_OFF);
+  gpio_set_pin_direction(PIN_PA25, GPIO_DIRECTION_OUT);
+  gpio_set_pin_level(PIN_PA25, false);
+  gpio_set_pin_pull_mode(PIN_PA25, GPIO_PULL_OFF);
+
+  gpio_set_pin_function(PIN_PA24, PINMUX_PA24G_USB_DM);
+  gpio_set_pin_function(PIN_PA25, PINMUX_PA25G_USB_DP);
+*/
+
+
+    pin_set_peripheral_function(PINMUX_PA24G_USB_DM);
+
+    pin_set_peripheral_function(PINMUX_PA25G_USB_DP);
+}
+
+
 int main(){
 
 
+    clock_source_init();
+    Sys_init();    // systick init should be later than clocksource init
 
 
-
-   
-
-  clock_source_init();
-  Sys_init();    // systick init should be later than clocksource init
-  NVIC_EnableIRQ(SERCOM4_IRQn);
-  NVIC_SetPriority(SERCOM4_IRQn,4);
-  //spi_init();
-  //spi_set_baudrate(500);
-  gpio_init();
+//    NVIC_EnableIRQ(SERCOM4_IRQn);
+//    NVIC_SetPriority(SERCOM4_IRQn,4);
     spi_init();
-  adc_clok_init();
-
+    //spi_set_baudrate(500);
+    gpio_init();
+//    spi_init();
+//    adc_clok_init();
+    tusb_init();
+    NVIC_EnableIRQ(USB_IRQn);
+    NVIC_SetPriority(USB_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY);
 //  SEGGER_RTT_Init();
-    dma_enable();
+//    dma_enable();
 
 
   //PB08 UART_Tx SCOM4PAD0
   //PB09 UART_Rx SCOM4PAD1
-  uart_clock_init(SERCOM4);
-  uart_basic_init(SERCOM4,50436,
-                  UART_RX_PAD1_TX_PAD0
-                  );
-    //gpio_configure_pin
+  //uart_clock_init(SERCOM4);
+//  uart_basic_init(SERCOM4,50436,
+//                  UART_RX_PAD1_TX_PAD0
+//                  );
+//    //gpio_configure_pin
 
 
 /* Create the task, storing the handle. */
+
  xTaskCreate(
           led_task,       /* Function that implements the task. */
           "led_task",          /* Text name for the task. */

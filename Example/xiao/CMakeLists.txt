@@ -13,6 +13,8 @@ set(CMAKE_C_STANDARD 99)
 enable_language(ASM)
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
+set(USE_TINYUSB TRUE CACHE BOOL "True if use tinyusb")
+
 
 message_color(Green "ARM_C_COMPILER : ${CMAKE_C_COMPILER}")
 message_color(Green "ARM_CXX_COMPILER : ${CMAKE_CXX_COMPILER}")
@@ -32,6 +34,29 @@ set(STARTUP_FILE ${BSP_PATH}/gcc/gcc/startup_samd21.c)
 set(SYSTEM_FILE ${BSP_PATH}/gcc/system_samd21.c  )
 
 message_color(Red ${PROJECT_NAME})
+
+
+if(USE_TINYUSB)
+    set(TINYUSB_PATH  ${THIRDPARTY_ROOT_PATH}/tinyusb)
+    file(GLOB TINYUSB_CLASS_SOURCES ${TINYUSB_PATH}/src/class/cdc/*.c)
+    file(GLOB TINYUSB_COMMON_SOURCES ${TINYUSB_PATH}/src/common/*.c)
+    file(GLOB TINYUSB_DEVICE_SOURCES ${TINYUSB_PATH}/src/device/*.c)
+    set(TINYUSB_PORTABLE_SOURCES ${TINYUSB_PATH}/src/portable/microchip/samd/dcd_samd.c)
+
+    set(TINYUSB_INCLUDE_PATH  ${TINYUSB_PATH}/src)
+
+    set(TINYUSB_SOURCES
+        ${TINYUSB_CLASS_SOURCES}
+        ${TINYUSB_COMMON_SOURCES}
+        ${TINYUSB_DEVICE_SOURCES}
+        ${TINYUSB_PORTABLE_SOURCES}
+        ${TINYUSB_PATH}/src/tusb.c
+        )
+
+endif(USE_TINYUSB)
+
+
+
 
 file(GLOB RTT_SOURCES
     ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER/SEGGER_RTT.c
@@ -62,6 +87,7 @@ set(SOURCE_FILES
     ${SYSTEM_FILE}
     ${RTT_SOURCES}
     ${FREERTOS_SOURCES}
+    ${TINYUSB_SOURCES}
     ${DRIVE_SOURCE_FILE}
      ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
@@ -73,7 +99,7 @@ set(DEPEN_DIR
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
-
+    ${TINYUSB_INCLUDE_PATH}
     ${THIRDPARTY_ROOT_PATH}/RTT/Config
     ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER
 
@@ -134,7 +160,7 @@ target_compile_options(project_lib PRIVATE
 
 
 
-add_executable(${PROJECT_NAME}  main.c ${SOURCE_FILES})
+add_executable(${PROJECT_NAME}  main.c freertos_hook.c  usb_descriptor.c ${SOURCE_FILES})
 
 
 

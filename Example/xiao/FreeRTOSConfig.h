@@ -15,7 +15,7 @@ void assert_triggered(const char *file, uint32_t line);
 #include <cmsis_compiler.h>
 #endif
 
-
+#define configSUPPORT_STATIC_ALLOCATION 1
 
 // <h> Basic
 extern uint32_t SystemCoreClock;
