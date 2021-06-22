@@ -16,3 +16,6 @@
 [submodule "components/stmems"]
 	path = components/stmems
 	url = https://github.com/STMicroelectronics/STMems_Standard_C_drivers
+[submodule "thirdparty/tinyusb"]
+	path = thirdparty/tinyusb
+	url = https://github.com/hathach/tinyusb.git
