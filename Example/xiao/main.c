@@ -125,9 +125,13 @@ void usb_port_init(){
  //   REG_PORT_DIRSET0  |=  PORT_PA17;
 //    REG_PORT_OUTSET0 |=  PORT_PA17;
 
+    #define DM_PIN PIN_PA24G_USB_DM
+    #define DM_MUX MUX_PA24G_USB_DM
+    #define DP_PIN PIN_PA25G_USB_DP
+    #define DP_MUX MUX_PA25G_USB_DP
+
     REG_PORT_DIRSET0 |= PORT_PA24;
     REG_PORT_OUTSET0 &= ~(PORT_PA24);
-
 
     REG_PORT_DIRSET0 |= PORT_PA25;
     REG_PORT_OUTSET0 &= ~(PORT_PA25);
