@@ -38,7 +38,8 @@ message_color(Red ${PROJECT_NAME})
 
 if(USE_TINYUSB)
     set(TINYUSB_PATH  ${THIRDPARTY_ROOT_PATH}/tinyusb)
-    file(GLOB TINYUSB_CLASS_SOURCES ${TINYUSB_PATH}/src/class/cdc/*.c)
+    file(GLOB TINYUSB_CDC_SOURCES ${TINYUSB_PATH}/src/class/cdc/*.c)
+    file(GLOB TINYUSB_MSC_SOURCES ${TINYUSB_PATH}/src/class/msc/*.c)
     file(GLOB TINYUSB_COMMON_SOURCES ${TINYUSB_PATH}/src/common/*.c)
     file(GLOB TINYUSB_DEVICE_SOURCES ${TINYUSB_PATH}/src/device/*.c)
     set(TINYUSB_PORTABLE_SOURCES ${TINYUSB_PATH}/src/portable/microchip/samd/dcd_samd.c)
@@ -46,7 +47,8 @@ if(USE_TINYUSB)
     set(TINYUSB_INCLUDE_PATH  ${TINYUSB_PATH}/src)
 
     set(TINYUSB_SOURCES
-        ${TINYUSB_CLASS_SOURCES}
+        ${TINYUSB_CDC_SOURCES}
+        ${TINYUSB_MSC_SOURCES}
         ${TINYUSB_COMMON_SOURCES}
         ${TINYUSB_DEVICE_SOURCES}
         ${TINYUSB_PORTABLE_SOURCES}
@@ -56,6 +58,10 @@ if(USE_TINYUSB)
 endif(USE_TINYUSB)
 
 
+set(HAL_SOURCES
+    ${CMAKE_SOURCE_DIR}/
+
+    )
 
 
 file(GLOB RTT_SOURCES
@@ -82,8 +88,32 @@ set(DRIVE_SOURCE_FILE
     )
 
 
+#CFLAGS += \
+#  -flto \
+#  -mthumb \
+#  -mabi=aapcs \
+#  -mcpu=cortex-m0plus \
+#  -nostdlib -nostartfiles \
+#  -DCONF_DFLL_OVERWRITE_CALIBRATION=0 \
+#  -DCFG_TUSB_MCU=OPT_MCU_SAMD21
+
+## For freeRTOS port source
+#FREERTOS_PORT = ARM_CM0
+
+
+set( HAL_SOURCES
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/gclk/hpl_gclk.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/pm/hpl_pm.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/sysctrl/hpl_sysctrl.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/src/hal_atomic.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/utils/src/utils_assert.c
+    )
+
+
 set(SOURCE_FILES
     ${STARTUP_FILE}
+    ${HAL_SOURCES}
     ${SYSTEM_FILE}
     ${RTT_SOURCES}
     ${FREERTOS_SOURCES}
@@ -93,9 +123,24 @@ set(SOURCE_FILES
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
     )
 
+
+
+set(
+    HAL_INCLUDE
+    ${CMAKE_CURRENT_SOURCE_DIR}/config
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/utils/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/pm/
+    ${CMAKE_CURRENT_SOURCE_DIR}/hri
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/port
+
+)
+
 set(DEPEN_DIR
+     ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${CMAKE_CURRENT_SOURCE_DIR}/
-    ${CMAKE_CURRENT_SOURCE_DIR}/driver
+    ${HAL_INCLUDE}
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
@@ -130,6 +175,16 @@ set(CFLAGS
     -${OPTIMIZATION_FLAGS}
     -mlong-calls
 
+     -flto
+
+    -mabi=aapcs
+      -nostartfiles
+     -DCONF_DFLL_OVERWRITE_CALIBRATION=0
+    -DCFG_TUSB_MCU=OPT_MCU_SAMD21
+
+
+
+
     )
 
 
@@ -148,6 +203,8 @@ target_include_directories(
 )
 target_compile_definitions(project_lib PRIVATE
         -DDEBUG
+          -DCONF_DFLL_OVERWRITE_CALIBRATION=0
+          -DCFG_TUSB_MCU=OPT_MCU_SAMD21
         -D__SAMD21G18A__
     )
 target_link_libraries(project_lib PRIVATE
@@ -160,7 +217,7 @@ target_compile_options(project_lib PRIVATE
 
 
 
-add_executable(${PROJECT_NAME}  main.c freertos_hook.c  usb_descriptor.c ${SOURCE_FILES})
+add_executable(${PROJECT_NAME}  main.c freertos_hook.c msc_disk.c usb_descriptor.c ${SOURCE_FILES})
 
 
 

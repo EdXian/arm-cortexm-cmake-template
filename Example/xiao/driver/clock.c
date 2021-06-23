@@ -1,160 +1,239 @@
 #include "clock.h"
 
+#define SYSCTRL_FUSES_OSC32K_CAL_ADDR   (NVMCTRL_OTP4 + 4)
+#define SYSCTRL_FUSES_OSC32K_CAL_Pos   6
+#define 	SYSCTRL_FUSES_OSC32K_ADDR   SYSCTRL_FUSES_OSC32K_CAL_ADDR
+#define 	SYSCTRL_FUSES_OSC32K_Pos   SYSCTRL_FUSES_OSC32K_CAL_Pos
+#define 	SYSCTRL_FUSES_OSC32K_Msk   (0x7Fu << SYSCTRL_FUSES_OSC32K_Pos)
 
 
+
+static void gclk_sync(void) {
+    while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
+        ;
+}
+
+static void dfll_sync(void) {
+    while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLRDY) == 0)
+        ;
+}
+
+#define NVM_SW_CALIB_DFLL48M_COARSE_VAL   58
+#define NVM_SW_CALIB_DFLL48M_FINE_VAL     64
+
+//void clock_source_init(void){
+//     NVMCTRL->CTRLB.bit.RWS = 1;
+
+//     SYSCTRL->XOSC32K.reg =
+//           SYSCTRL_XOSC32K_STARTUP(6) | SYSCTRL_XOSC32K_XTALEN | SYSCTRL_XOSC32K_EN32K;
+//       SYSCTRL->XOSC32K.bit.ENABLE = 1;
+//       while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_XOSC32KRDY) == 0)
+//           ;
+
+//       GCLK->GENDIV.reg = GCLK_GENDIV_ID(1);
+//       gclk_sync();
+
+//       GCLK->GENCTRL.reg = GCLK_GENCTRL_ID(1) | GCLK_GENCTRL_SRC_XOSC32K | GCLK_GENCTRL_GENEN;
+//       gclk_sync();
+
+//       GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(0) | GCLK_CLKCTRL_GEN_GCLK1 | GCLK_CLKCTRL_CLKEN;
+//       gclk_sync();
+
+//       SYSCTRL->DFLLCTRL.bit.ONDEMAND = 0;
+//       dfll_sync();
+
+//       SYSCTRL->DFLLMUL.reg = SYSCTRL_DFLLMUL_CSTEP(31) | SYSCTRL_DFLLMUL_FSTEP(511) |
+//                              SYSCTRL_DFLLMUL_MUL((48000000 / (32 * 1024)));
+//       dfll_sync();
+
+//       SYSCTRL->DFLLCTRL.reg |=
+//           SYSCTRL_DFLLCTRL_MODE | SYSCTRL_DFLLCTRL_WAITLOCK | SYSCTRL_DFLLCTRL_QLDIS;
+//       dfll_sync();
+
+//       SYSCTRL->DFLLCTRL.reg |= SYSCTRL_DFLLCTRL_ENABLE;
+
+//       while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLLCKC) == 0 ||
+//              (SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLLCKF) == 0)
+//           ;
+//       dfll_sync();
+
+//       GCLK->GENDIV.reg = GCLK_GENDIV_ID(0);
+//          gclk_sync();
+
+//          // Add GCLK_GENCTRL_OE below to output GCLK0 on the SWCLK pin.
+//          GCLK->GENCTRL.reg =
+//              GCLK_GENCTRL_ID(0) | GCLK_GENCTRL_SRC_DFLL48M | GCLK_GENCTRL_IDC | GCLK_GENCTRL_GENEN;
+//          gclk_sync();
+
+//    PM->CPUSEL.reg  = PM_CPUSEL_CPUDIV_DIV1 ;
+
+//    PM->APBASEL.reg = PM_APBASEL_APBADIV_DIV1_Val ;
+//    PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
+//    PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
+
+//    PM->AHBMASK.bit.USB_=1;
+
+//    PM->APBBMASK.bit.USB_ = 1;
+
+
+//    GCLK_CLKCTRL_Type clkctrl = {0};
+//    uint16_t temp;
+//    GCLK->CLKCTRL.bit.ID =  USB_GCLK_ID;
+//    temp = GCLK->CLKCTRL.reg;
+//    clkctrl.bit.CLKEN = 1;
+//    clkctrl.bit.WRTLOCK = 0;
+//    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;     // usb 48MHz
+//    GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
+//}
 
 void clock_source_init(void){
-
     uint32_t tempDFLL48CalibrationCoarse;	/* used to retrieve DFLL48 coarse calibration value from NVM */
 
-    /* ----------------------------------------------------------------------------------------------
-    * 1) Set Flash wait states for 48 MHz (per Table 37-40 in data sheet)
-    */
+        /* ----------------------------------------------------------------------------------------------
+        * 1) Set Flash wait states for 48 MHz (per Table 37-40 in data sheet)
+        */
 
-    NVMCTRL->CTRLB.bit.RWS = 1;		/* 1 wait state required @ 3.3V & 48MHz */
+        NVMCTRL->CTRLB.bit.RWS = 1;		/* 1 wait state required @ 3.3V & 48MHz */
 
-    /* ----------------------------------------------------------------------------------------------
-    * 2) Enable XOSC32K clock (External on-board 32.768kHz oscillator), will be used as DFLL48M reference.
-    */
+        /* ----------------------------------------------------------------------------------------------
+        * 2) Enable XOSC32K clock (External on-board 32.768kHz oscillator), will be used as DFLL48M reference.
+        */
 
-    // Configure SYSCTRL->XOSC32K settings
-    SYSCTRL_XOSC32K_Type sysctrl_xosc32k = {
-        .bit.WRTLOCK = 0,		/* XOSC32K configuration is not locked */
-        .bit.STARTUP = 0x2,		/* 3 cycle start-up time */
-        .bit.ONDEMAND = 0,		/* Osc. is always running when enabled */
-        .bit.RUNSTDBY = 0,		/* Osc. is disabled in standby sleep mode */
-        .bit.AAMPEN = 0,		/* Disable automatic amplitude control */
-        .bit.EN32K = 1,			/* 32kHz output is disabled */
-        .bit.XTALEN = 1			/* Crystal connected to XIN32/XOUT32 */
-    };
-    // Write these settings
-    SYSCTRL->XOSC32K.reg = sysctrl_xosc32k.reg;
-    // Enable the Oscillator - Separate step per data sheet recommendation (sec 17.6.3)
-    SYSCTRL->XOSC32K.bit.ENABLE = 1;
+        // Configure SYSCTRL->XOSC32K settings
+        SYSCTRL_XOSC32K_Type sysctrl_xosc32k = {
+            .bit.WRTLOCK = 0,		/* XOSC32K configuration is not locked */
+            .bit.STARTUP = 0x2,		/* 3 cycle start-up time */
+            .bit.ONDEMAND = 0,		/* Osc. is always running when enabled */
+            .bit.RUNSTDBY = 0,		/* Osc. is disabled in standby sleep mode */
+            .bit.AAMPEN = 0,		/* Disable automatic amplitude control */
+            .bit.EN32K = 1,			/* 32kHz output is disabled */
+            .bit.XTALEN = 1			/* Crystal connected to XIN32/XOUT32 */
+        };
+        // Write these settings
+        SYSCTRL->XOSC32K.reg = sysctrl_xosc32k.reg;
+        // Enable the Oscillator - Separate step per data sheet recommendation (sec 17.6.3)
+        SYSCTRL->XOSC32K.bit.ENABLE = 1;
 
-    // Wait for XOSC32K to stabilize
-    while(!SYSCTRL->PCLKSR.bit.XOSC32KRDY);
+        // Wait for XOSC32K to stabilize
+        while(!SYSCTRL->PCLKSR.bit.XOSC32KRDY);
 
-    /* ----------------------------------------------------------------------------------------------
-    * 3) Put XOSC32K as source of Generic Clock Generator 1
-    */
+        /* ----------------------------------------------------------------------------------------------
+        * 3) Put XOSC32K as source of Generic Clock Generator 1
+        */
 
-    // Set the Generic Clock Generator 1 output divider to 1
-    // Configure GCLK->GENDIV settings
-    GCLK_GENDIV_Type gclk1_gendiv = {
-        .bit.DIV = 1,								/* Set output division factor = 1 */
-        .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K	/* Apply division factor to Generator 1 */
-    };
-    // Write these settings
-    // or GCLK->GENDIV.reg = GCLK_GENDIV_ID( GENERIC_CLOCK_GENERATOR_XOSC32K ) ;
+        // Set the Generic Clock Generator 1 output divider to 1
+        // Configure GCLK->GENDIV settings
+        GCLK_GENDIV_Type gclk1_gendiv = {
+            .bit.DIV = 1,								/* Set output division factor = 1 */
+            .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K	/* Apply division factor to Generator 1 */
+        };
+        // Write these settings
+        GCLK->GENDIV.reg = gclk1_gendiv.reg;
 
-    GCLK->GENDIV.reg = gclk1_gendiv.reg;
+        // Configure Generic Clock Generator 1 with XOSC32K as source
+        GCLK_GENCTRL_Type gclk1_genctrl = {
+            .bit.RUNSTDBY = 0,		/* Generic Clock Generator is stopped in stdby */
+            .bit.DIVSEL =  0,		/* Use GENDIV.DIV value to divide the generator */
+            .bit.OE = 0,			/* Disable generator output to GCLK_IO[1] */
+            .bit.OOV = 0,			/* GCLK_IO[1] output value when generator is off */
+            .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
+            .bit.GENEN = 1,			/* Enable the generator */
+            .bit.SRC = 0x05,		/* Generator source: XOSC32K output */
+            .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K			/* Generator ID: 1 */
+        };
+        // Write these settings
+        GCLK->GENCTRL.reg = gclk1_genctrl.reg;
+        // GENCTRL is Write-Synchronized...so wait for write to complete
+        while(GCLK->STATUS.bit.SYNCBUSY);
 
-    // Configure Generic Clock Generator 1 with XOSC32K as source
-    GCLK_GENCTRL_Type gclk1_genctrl = {
-        .bit.RUNSTDBY = 0,		/* Generic Clock Generator is stopped in stdby */
-        .bit.DIVSEL =  0,		/* Use GENDIV.DIV value to divide the generator */
-        .bit.OE = 0,			/* Disable generator output to GCLK_IO[1] */
-        .bit.OOV = 0,			/* GCLK_IO[1] output value when generator is off */
-        .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
-        .bit.GENEN = 1,			/* Enable the generator */
-        .bit.SRC = GCLK_GENCTRL_SRC_XOSC32K_Val,		/* Generator source: XOSC32K output */
-        .bit.ID = GENERIC_CLOCK_GENERATOR_XOSC32K			/* Generator ID: 1 */
-    };
-    // Write these settings
-    GCLK->GENCTRL.reg = gclk1_genctrl.reg;
-    // GENCTRL is Write-Synchronized...so wait for write to complete
-    while(GCLK->STATUS.bit.SYNCBUSY);
+        /* ----------------------------------------------------------------------------------------------
+        * 4) Put Generic Clock Generator 1 as source for Generic Clock Multiplexer 0 (DFLL48M reference)
+        */
 
-    /* ----------------------------------------------------------------------------------------------
-    * 4) Put Generic Clock Generator 1 as source for Generic Clock Multiplexer 0 (DFLL48M reference)
-    */
+        GCLK_CLKCTRL_Type gclk_clkctrl = {
+            .bit.WRTLOCK = 0,		/* Generic Clock is not locked from subsequent writes */
+            .bit.CLKEN = 1,			/* Enable the Generic Clock */
+            .bit.GEN = GENERIC_CLOCK_GENERATOR_XOSC32K, 	/* Generic Clock Generator 1 is the source */
+            .bit.ID = 0x00			/* Generic Clock Multiplexer 0 (DFLL48M Reference) */
+        };
+        // Write these settings
+        GCLK->CLKCTRL.reg = gclk_clkctrl.reg;
 
-    GCLK_CLKCTRL_Type gclk_clkctrl = {
-        .bit.WRTLOCK = 0,		/* Generic Clock is not locked from subsequent writes */
-        .bit.CLKEN = 1,			/* Enable the Generic Clock */
-        .bit.GEN = GENERIC_CLOCK_GENERATOR_XOSC32K, 	/* Generic Clock Generator 1 is the source */
-        .bit.ID = 0x00			/* Generic Clock Multiplexer 0 (DFLL48M Reference) */
-    };
-    // Write these settings
-    GCLK->CLKCTRL.reg = gclk_clkctrl.reg;
+        /* ----------------------------------------------------------------------------------------------
+        * 5) Enable DFLL48M clock
+        */
 
-    /* ----------------------------------------------------------------------------------------------
-    * 5) Enable DFLL48M clock
-    */
+        // DFLL Configuration in Closed Loop mode, cf product data sheet chapter
+        // 17.6.7.1 - Closed-Loop Operation
 
-    // DFLL Configuration in Closed Loop mode, cf product data sheet chapter
-    // 17.6.7.1 - Closed-Loop Operation
+        // Enable the DFLL48M in open loop mode. Without this step, attempts to go into closed loop mode at 48 MHz will
+        // result in Processor Reset (you'll be at the in the Reset_Handler in startup_samd21.c).
+        // PCLKSR.DFLLRDY must be one before writing to the DFLL Control register
+        // Note that the DFLLRDY bit represents status of register synchronization - NOT clock stability
+        // (see Data Sheet 17.6.14 Synchronization for detail)
+        while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+        SYSCTRL->DFLLCTRL.reg = (uint16_t)(SYSCTRL_DFLLCTRL_ENABLE);
+        while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
 
-    // Enable the DFLL48M in open loop mode. Without this step, attempts to go into closed loop mode at 48 MHz will
-    // result in Processor Reset (you'll be at the in the Reset_Handler in startup_samd21.c).
-    // PCLKSR.DFLLRDY must be one before writing to the DFLL Control register
-    // Note that the DFLLRDY bit represents status of register synchronization - NOT clock stability
-    // (see Data Sheet 17.6.14 Synchronization for detail)
-    while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
-    SYSCTRL->DFLLCTRL.reg = (uint16_t)(SYSCTRL_DFLLCTRL_ENABLE);
-    while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+        // Set up the Multiplier, Coarse and Fine steps
+        SYSCTRL_DFLLMUL_Type sysctrl_dfllmul = {
+            .bit.CSTEP = 31,		/* Coarse step - use half of the max value (63) */
+            .bit.FSTEP = 511,		/* Fine step - use half of the max value (1023) */
+            .bit.MUL = 1465			/* Multiplier = MAIN_CLK_FREQ (48MHz) / EXT_32K_CLK_FREQ (32768 Hz) */
+        };
+        // Write these settings
+        SYSCTRL->DFLLMUL.reg = sysctrl_dfllmul.reg;
+        // Wait for synchronization
+        while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
 
-    // Set up the Multiplier, Coarse and Fine steps
-    SYSCTRL_DFLLMUL_Type sysctrl_dfllmul = {
-        .bit.CSTEP = 31,		/* Coarse step - use half of the max value (63) */
-        .bit.FSTEP = 511,		/* Fine step - use half of the max value (1023) */
-        .bit.MUL = 1465			/* Multiplier = MAIN_CLK_FREQ (48MHz) / EXT_32K_CLK_FREQ (32768 Hz) */
-    };
-    // Write these settings
-    SYSCTRL->DFLLMUL.reg = sysctrl_dfllmul.reg;
-    // Wait for synchronization
-    while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+        // To reduce lock time, load factory calibrated values into DFLLVAL (cf. Data Sheet 17.6.7.1)
+        // Location of value is defined in Data Sheet Table 10-5. NVM Software Calibration Area Mapping
 
-    // To reduce lock time, load factory calibrated values into DFLLVAL (cf. Data Sheet 17.6.7.1)
-    // Location of value is defined in Data Sheet Table 10-5. NVM Software Calibration Area Mapping
+        // Get factory calibrated value for "DFLL48M COARSE CAL" from NVM Software Calibration Area
+        tempDFLL48CalibrationCoarse = *(uint32_t*)FUSES_DFLL48M_COARSE_CAL_ADDR;
+        tempDFLL48CalibrationCoarse &= FUSES_DFLL48M_COARSE_CAL_Msk;
+        tempDFLL48CalibrationCoarse = tempDFLL48CalibrationCoarse>>FUSES_DFLL48M_COARSE_CAL_Pos;
+        // Write the coarse calibration value
+        SYSCTRL->DFLLVAL.bit.COARSE = tempDFLL48CalibrationCoarse;
+        // Switch DFLL48M to Closed Loop mode and enable WAITLOCK
+        while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+        SYSCTRL->DFLLCTRL.reg |= (uint16_t) (SYSCTRL_DFLLCTRL_MODE | SYSCTRL_DFLLCTRL_WAITLOCK);
 
-    // Get factory calibrated value for "DFLL48M COARSE CAL" from NVM Software Calibration Area
-    tempDFLL48CalibrationCoarse = *(uint32_t*)FUSES_DFLL48M_COARSE_CAL_ADDR;
-    tempDFLL48CalibrationCoarse &= FUSES_DFLL48M_COARSE_CAL_Msk;
-    tempDFLL48CalibrationCoarse = tempDFLL48CalibrationCoarse>>FUSES_DFLL48M_COARSE_CAL_Pos;
-    // Write the coarse calibration value
-    SYSCTRL->DFLLVAL.bit.COARSE = tempDFLL48CalibrationCoarse;
-    // Switch DFLL48M to Closed Loop mode and enable WAITLOCK
-    while(!SYSCTRL->PCLKSR.bit.DFLLRDY);
+        /* ----------------------------------------------------------------------------------------------
+        * 6) Switch Generic Clock Generator 0 to DFLL48M. CPU will run at 48MHz.
+        */
 
-    SYSCTRL->DFLLCTRL.reg |= (uint16_t) (SYSCTRL_DFLLCTRL_MODE | SYSCTRL_DFLLCTRL_WAITLOCK);
+        // Now that DFLL48M is running, switch CLKGEN0 source to it to run the core at 48 MHz.
+        // Enable output of Generic Clock Generator 0 (GCLK_MAIN) to the GCLK_IO[0] GPIO Pin
+        GCLK_GENCTRL_Type gclk_genctrl0 = {
+            .bit.RUNSTDBY = 0,		/* Generic Clock Generator is stopped in stdby */
+            .bit.DIVSEL =  0,		/* Use GENDIV.DIV value to divide the generator */
+            .bit.OE = 1,			/* Enable generator output to GCLK_IO[0] */
+            .bit.OOV = 0,			/* GCLK_IO[0] output value when generator is off */
+            .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
+            .bit.GENEN = 1,			/* Enable the generator */
+            .bit.SRC = 0x07,		/* Generator source: DFLL48M output */
+            .bit.ID = GENERIC_CLOCK_GENERATOR_MAIN			/* Generator ID: 0 */
+        };
+        GCLK->GENCTRL.reg = gclk_genctrl0.reg;
+        // GENCTRL is Write-Synchronized...so wait for write to complete
+        while(GCLK->STATUS.bit.SYNCBUSY);
 
-    /* ----------------------------------------------------------------------------------------------
-    * 6) Switch Generic Clock Generator 0 to DFLL48M. CPU will run at 48MHz.
-    */
+        // Direct the GCLK_IO[0] output to PA28
+        PORT_WRCONFIG_Type port0_wrconfig = {
+            .bit.HWSEL = 1,			/* Pin# (28) - falls in the upper half of the 32-pin PORT group */
+            .bit.WRPINCFG = 1,		/* Update PINCFGy registers for all pins selected */
+            .bit.WRPMUX = 1,		/* Update PMUXn registers for all pins selected */
+            .bit.PMUX = 7,			/* Peripheral Function H selected (GCLK_IO[0]) */
+            .bit.PMUXEN = 1,		/* Enable peripheral Multiplexer */
+            .bit.PINMASK = (uint16_t)(1 << (28-16)) /* Select the pin(s) to be configured */
+        };
+        // Write these settings
+        PORT->Group[0].WRCONFIG.reg = port0_wrconfig.reg;
 
-    // Now that DFLL48M is running, switch CLKGEN0 source to it to run the core at 48 MHz.
-    // Enable output of Generic Clock Generator 0 (GCLK_MAIN) to the GCLK_IO[0] GPIO Pin
-    GCLK_GENCTRL_Type gclk_genctrl0 = {
-        .bit.RUNSTDBY = 0,		/* Generic Clock Generator is stopped in stdby */
-        .bit.DIVSEL =  0,		/* Use GENDIV.DIV value to divide the generator */
-        .bit.OE = 1,			/* Enable generator output to GCLK_IO[0] */
-        .bit.OOV = 0,			/* GCLK_IO[0] output value when generator is off */
-        .bit.IDC = 1,			/* Generator duty cycle is 50/50 */
-        .bit.GENEN = 1,			/* Enable the generator */
-        .bit.SRC = GCLK_GENCTRL_SRC_DFLL48M_Val,		/* Generator source: DFLL48M output */
-        .bit.ID = GENERIC_CLOCK_GENERATOR_MAIN			/* Generator ID: 0 */
-    };
-    GCLK->GENCTRL.reg = gclk_genctrl0.reg;
-    // GENCTRL is Write-Synchronized...so wait for write to complete
-    while(GCLK->STATUS.bit.SYNCBUSY);
-
-    // Direct the GCLK_IO[0] output to PA28
-    PORT_WRCONFIG_Type port0_wrconfig = {
-        .bit.HWSEL = 1,			/* Pin# (28) - falls in the upper half of the 32-pin PORT group */
-        .bit.WRPINCFG = 1,		/* Update PINCFGy registers for all pins selected */
-        .bit.WRPMUX = 1,		/* Update PMUXn registers for all pins selected */
-        .bit.PMUX = 7,			/* Peripheral Function H selected (GCLK_IO[0]) */
-        .bit.PMUXEN = 1,		/* Enable peripheral Multiplexer */
-        .bit.PINMASK = (uint16_t)(1 << (28-16)) /* Select the pin(s) to be configured */
-    };
-    // Write these settings
-    PORT->Group[0].WRCONFIG.reg = port0_wrconfig.reg;
-
-    /* ----------------------------------------------------------------------------------------------
-    * 7) Modify prescaler value of OSC8M to produce 8MHz output
-    */
+//    /* ----------------------------------------------------------------------------------------------
+//    * 7) Modify prescaler value of OSC8M to produce 8MHz output
+//    */
 
     SYSCTRL->OSC8M.bit.PRESC = 0;		/* Prescale by 1 */
     SYSCTRL->OSC8M.bit.ONDEMAND = 0 ;	/* Oscillator is always on if enabled */
@@ -191,11 +270,17 @@ void clock_source_init(void){
     /* ----------------------------------------------------------------------------------------------
     * 9) Set CPU and APBx BUS Clocks to 48MHz
     */
-    PM->CPUSEL.reg  = PM_CPUSEL_CPUDIV_DIV1 ;
+    PM->CPUSEL.reg  |= PM_CPUSEL_CPUDIV_DIV1 ;
 
-    PM->APBASEL.reg = PM_APBASEL_APBADIV_DIV1_Val ;
-    PM->APBBSEL.reg = PM_APBBSEL_APBBDIV_DIV1_Val ;
-    PM->APBCSEL.reg = PM_APBCSEL_APBCDIV_DIV1_Val ;
+    PM->APBASEL.reg |= PM_APBASEL_APBADIV_DIV1_Val ;
+    PM->APBBSEL.reg |= PM_APBBSEL_APBBDIV_DIV1_Val ;
+    PM->APBCSEL.reg |= PM_APBCSEL_APBCDIV_DIV1_Val ;
+
+    PM->AHBMASK.bit.DMAC_=1;
+    PM->AHBMASK.bit.NVMCTRL_=1;
+    PM->AHBMASK.bit.USB_=1;
+    PM->APBAMASK.bit.GCLK_=1;
+    PM->APBAMASK.bit.SYSCTRL_=1;
 
     PM->AHBMASK.bit.USB_=1;
 
@@ -227,11 +312,7 @@ void clock_source_init(void){
     clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
     GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
 
-    PM->AHBMASK.bit.DMAC_=1;
-    PM->AHBMASK.bit.NVMCTRL_=1;
-    PM->AHBMASK.bit.USB_=1;
-    PM->APBAMASK.bit.GCLK_=1;
-    PM->APBAMASK.bit.SYSCTRL_=1;
+
 
 
 */
