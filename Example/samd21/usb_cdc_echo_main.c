@@ -44,112 +44,85 @@
 
 //#include <hpl_dma.h>
 //#include <hpl_dmac_config.h>
-#define _GCLK_INIT_1ST 0x00000000
-/* Not referenced GCLKs, initialized last */
-#define _GCLK_INIT_LAST 0x000000FF
 
+#define _GCLK_INIT_1ST (1 << 0 | 1 << 1)
+
+/* Not referenced GCLKs, initialized last */
+#define _GCLK_INIT_LAST (~_GCLK_INIT_1ST)
+
+
+#define CONF_CPU_FREQUENCY 48000000
 void board_init(void)
 {
-    //hri_nvmctrl_set_CTRLB_RWS_bf(NVMCTRL, 1);
-    NVMCTRL->CTRLB.bit.RWS=1;
-    _pm_init();
-//    PM_CRITICAL_SECTION_ENTER();
-//        PM->CPUSEL.bit.CPUDIV =1;
-//        PM->APBASEL.bit.APBADIV=1;
-//        PM->APBBSEL.bit.APBBDIV=1;
-//        PM->APBCSEL.bit.APBCDIV=1;
-//    PM_CRITICAL_SECTION_LEAVE();
+  // Clock init ( follow hpl_init.c )
+  hri_nvmctrl_set_CTRLB_RWS_bf(NVMCTRL, 2);
 
+  _pm_init();
+  _sysctrl_init_sources();
 
-    _sysctrl_init_sources();
 #if _GCLK_INIT_1ST
-    _gclk_init_generators_by_fref(_GCLK_INIT_1ST);
+  _gclk_init_generators_by_fref(_GCLK_INIT_1ST);
 #endif
-    _sysctrl_init_referenced_generators();
-    _gclk_init_generators_by_fref(_GCLK_INIT_LAST);
+  _sysctrl_init_referenced_generators();
+  _gclk_init_generators_by_fref(_GCLK_INIT_LAST);
 
-#if CONF_DMAC_ENABLE
-    _pm_enable_bus_clock(PM_BUS_AHB, DMAC);
-    _pm_enable_bus_clock(PM_BUS_APBB, DMAC);
-    _dma_init();
-#endif
-}
+  // Update SystemCoreClock since it is hard coded with asf4 and not correct
+  // Init 1ms tick timer (samd SystemCoreClock may not correct)
+  SystemCoreClock = CONF_CPU_FREQUENCY;
+  SysTick_Config(CONF_CPU_FREQUENCY / 1000);
 
-#define SYSCTRL_FUSES_OSC32K_CAL_ADDR   (NVMCTRL_OTP4 + 4)
-#define SYSCTRL_FUSES_OSC32K_CAL_Pos   6
-#define 	SYSCTRL_FUSES_OSC32K_ADDR   SYSCTRL_FUSES_OSC32K_CAL_ADDR
-#define 	SYSCTRL_FUSES_OSC32K_Pos   SYSCTRL_FUSES_OSC32K_CAL_Pos
-#define 	SYSCTRL_FUSES_OSC32K_Msk   (0x7Fu << SYSCTRL_FUSES_OSC32K_Pos)
+  // Led init
 
 
-
-static void gclk_sync(void) {
-    while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
-        ;
-}
-
-static void dfll_sync(void) {
-    while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLRDY) == 0)
-        ;
-}
-
-#define NVM_SW_CALIB_DFLL48M_COARSE_VAL   58
-#define NVM_SW_CALIB_DFLL48M_FINE_VAL     64
+  /* USB Clock init
+   * The USB module requires a GCLK_USB of 48 MHz ~ 0.25% clock
+   * for low speed and full speed operation. */
+  PM->APBBMASK.bit.USB_ = 1;
+    PM->AHBMASK.bit.USB_=1;
 
 
+    GCLK_CLKCTRL_Type clkctrl = {0};
+    uint16_t temp;
+    GCLK->CLKCTRL.bit.ID =  USB_GCLK_ID;
+    temp = GCLK->CLKCTRL.reg;
+    clkctrl.bit.CLKEN = 1;
+    clkctrl.bit.WRTLOCK = 0;
+    clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK6_Val;     // usb 48MHz
+    GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
 
+  // USB Pin Init
+  gpio_set_pin_direction(PIN_PA24, GPIO_DIRECTION_OUT);
+  gpio_set_pin_level(PIN_PA24, false);
+  gpio_set_pin_pull_mode(PIN_PA24, GPIO_PULL_OFF);
+  gpio_set_pin_direction(PIN_PA25, GPIO_DIRECTION_OUT);
+  gpio_set_pin_level(PIN_PA25, false);
+  gpio_set_pin_pull_mode(PIN_PA25, GPIO_PULL_OFF);
 
-void clock_source_init(void){
-     NVMCTRL->CTRLB.bit.RWS = 1;
+  gpio_set_pin_function(PIN_PA24, PINMUX_PA24G_USB_DM);
+  gpio_set_pin_function(PIN_PA25, PINMUX_PA25G_USB_DP);
 
-     SYSCTRL->XOSC32K.reg =
-           SYSCTRL_XOSC32K_STARTUP(6) | SYSCTRL_XOSC32K_XTALEN | SYSCTRL_XOSC32K_EN32K;
-       SYSCTRL->XOSC32K.bit.ENABLE = 1;
-       while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_XOSC32KRDY) == 0)
-           ;
+  // Output 500hz PWM on D12 (PA19 - TCC0 WO[3]) so we can validate the GCLK0 clock speed with a Saleae.
+//  _pm_enable_bus_clock(PM_BUS_APBC, TCC0);
+//  TCC0->PER.bit.PER = 48000000 / 1000;
+//  TCC0->CC[3].bit.CC = 48000000 / 2000;
+//  TCC0->CTRLA.bit.ENABLE = true;
 
-       GCLK->GENDIV.reg = GCLK_GENDIV_ID(1);
-       gclk_sync();
-
-       GCLK->GENCTRL.reg = GCLK_GENCTRL_ID(1) | GCLK_GENCTRL_SRC_XOSC32K | GCLK_GENCTRL_GENEN;
-       gclk_sync();
-
-       GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(0) | GCLK_CLKCTRL_GEN_GCLK1 | GCLK_CLKCTRL_CLKEN;
-       gclk_sync();
-
-       SYSCTRL->DFLLCTRL.bit.ONDEMAND = 0;
-       dfll_sync();
-
-       SYSCTRL->DFLLMUL.reg = SYSCTRL_DFLLMUL_CSTEP(31) | SYSCTRL_DFLLMUL_FSTEP(511) |
-                              SYSCTRL_DFLLMUL_MUL((48000000 / (32 * 1024)));
-       dfll_sync();
-
-       SYSCTRL->DFLLCTRL.reg |=
-           SYSCTRL_DFLLCTRL_MODE | SYSCTRL_DFLLCTRL_WAITLOCK | SYSCTRL_DFLLCTRL_QLDIS;
-       dfll_sync();
-
-       SYSCTRL->DFLLCTRL.reg |= SYSCTRL_DFLLCTRL_ENABLE;
-
-       while ((SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLLCKC) == 0 ||
-              (SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLLCKF) == 0)
-           ;
-       dfll_sync();
-
-       GCLK->GENDIV.reg = GCLK_GENDIV_ID(6);
-          gclk_sync();
-
-          // Add GCLK_GENCTRL_OE below to output GCLK0 on the SWCLK pin.
-          GCLK->GENCTRL.reg =
-              GCLK_GENCTRL_ID(6) | GCLK_GENCTRL_SRC_DFLL48M | GCLK_GENCTRL_IDC | GCLK_GENCTRL_GENEN;
-          gclk_sync();
+//  gpio_set_pin_function(PIN_PA19, PINMUX_PA19F_TCC0_WO3);
+//  _gclk_enable_channel(TCC0_GCLK_ID, GCLK_CLKCTRL_GEN_GCLK0_Val);
 
 }
+
+
+
+
+
+
 
 int main(void)
 {
     atmel_start_init();
 
-    board_init();
+//   board_init();
 //    _pm_init();
 //    clock_source_init();
 
