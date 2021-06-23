@@ -1,4 +1,7 @@
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <string.h>
 #include "sam.h"
 #include "FreeRTOS.h"
 #include "SEGGER_RTT.h"
@@ -10,11 +13,9 @@
 #include "clock.h"
 #include "adc.h"
 #include "pinconfig.h"
-#include "spi.h"
+
 #include "tusb_config.h"
 #include "tusb.h"
-
-
 #include "timers.h"
 #include "queue.h"
 #include "semphr.h"
@@ -70,21 +71,7 @@ void Sys_init(){
     NVIC_EnableIRQ(SysTick_IRQn);
 }
 
-void led_task(void *p){
-    uint16_t adc_val;
-    while(1){
-        togle_pin();
-//        uart_write_byte(SERCOM4,'a');
-//        asm("nop");
-//        uart_write_byte(SERCOM4,'b');
-//        asm("nop");
-//        uart_write_byte(SERCOM4,'c');
-//        asm("nop");
-//        spiSend(0x66);
-//        adc_val = adc_read();
-        vTaskDelay(100);
-    }
-}
+
 void SERCOM4_Handler(void){
 
    	if (SERCOM4->USART.INTFLAG.bit.RXC)
@@ -143,43 +130,7 @@ void cdc_task(void* params);
 
 
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2019 Ha Thach (tinyusb.org)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "FreeRTOS.h"
-#include "task.h"
-#include "timers.h"
-#include "queue.h"
-#include "semphr.h"
-
-
-#include "tusb.h"
 
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
@@ -304,7 +255,7 @@ void cdc_task(void* params)
     }
 
     // For ESP32-S2 this delay is essential to allow idle how to run and reset wdt
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(100));
   }
 }
 
@@ -355,15 +306,17 @@ int main(){
 
 //    NVIC_EnableIRQ(SERCOM4_IRQn);
 //    NVIC_SetPriority(SERCOM4_IRQn,4);
-    spi_init();
+    //spi_init();
     //spi_set_baudrate(500);
     gpio_init();
 //    spi_init();
 //    adc_clok_init();
-    usb_port_init();
-    NVIC_SetPriority(USB_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY);
-    tusb_init();
 
+    usb_port_init();
+
+    //tusb_init();
+
+     NVIC_SetPriority(USB_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY);
 //  SEGGER_RTT_Init();
 //    dma_enable();
 
@@ -393,9 +346,6 @@ int main(){
       vTaskStartScheduler();
     #endif
     while(1){
-        for(int i=0;i<1000000;i++){
-            asm("nop");
-        }
-        togle_pin();
+
     }
 }
