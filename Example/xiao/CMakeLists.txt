@@ -7,7 +7,7 @@ project(xiao VERSION ${PROJECT_VERSION}  LANGUAGES C ASM )
 include(utils)
 include(bsp)
 include(jlink)
-include(doxygen)
+
 
 set(CMAKE_C_STANDARD 99)
 enable_language(ASM)
@@ -24,15 +24,11 @@ message_color(Green "ARM_ASM_COMPILER : ${CMAKE_ASM_COMPILER}")
 set(BSP_PATH  ${BSP_ROOT_PATH}/Atmel/SAMD21/samd21a)
 
 
-set(CONFIG_PATH ${BSP_PATH}/Config)
 
 set(TARGET_COMPONENTS_PATH   ${BSP_PATH}/include )
-
 set(CMSIS_PATH ${THIRDPARTY_ROOT_PATH}/CMSIS_5/CMSIS/Core/Include)
-
 set(STARTUP_FILE ${BSP_PATH}/gcc/gcc/startup_samd21.c)
 set(SYSTEM_FILE ${BSP_PATH}/gcc/system_samd21.c  )
-
 message_color(Red ${PROJECT_NAME})
 
 
@@ -43,9 +39,7 @@ if(USE_TINYUSB)
     file(GLOB TINYUSB_COMMON_SOURCES ${TINYUSB_PATH}/src/common/*.c)
     file(GLOB TINYUSB_DEVICE_SOURCES ${TINYUSB_PATH}/src/device/*.c)
     set(TINYUSB_PORTABLE_SOURCES ${TINYUSB_PATH}/src/portable/microchip/samd/dcd_samd.c)
-
     set(TINYUSB_INCLUDE_PATH  ${TINYUSB_PATH}/src)
-
     set(TINYUSB_SOURCES
         ${TINYUSB_CDC_SOURCES}
         ${TINYUSB_MSC_SOURCES}
@@ -54,10 +48,13 @@ if(USE_TINYUSB)
         ${TINYUSB_PORTABLE_SOURCES}
         ${TINYUSB_PATH}/src/tusb.c
         )
-
 endif(USE_TINYUSB)
 
 
+set(HAL_SOURCES
+    ${CMAKE_SOURCE_DIR}/
+
+    )
 
 
 file(GLOB RTT_SOURCES
@@ -84,9 +81,34 @@ set(DRIVE_SOURCE_FILE
     )
 
 
+#CFLAGS += \
+#  -flto \
+#  -mthumb \
+#  -mabi=aapcs \
+#  -mcpu=cortex-m0plus \
+#  -nostdlib -nostartfiles \
+#  -DCONF_DFLL_OVERWRITE_CALIBRATION=0 \
+#  -DCFG_TUSB_MCU=OPT_MCU_SAMD21
+
+## For freeRTOS port source
+#FREERTOS_PORT = ARM_CM0
+
+
+set( HAL_SOURCES
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/gclk/hpl_gclk.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/pm/hpl_pm.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/sysctrl/hpl_sysctrl.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/src/hal_atomic.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/utils/src/utils_assert.c
+    )
+
+
 set(SOURCE_FILES
     ${STARTUP_FILE}
     ${SYSTEM_FILE}
+
+    ${HAL_SOURCES}
     ${RTT_SOURCES}
     ${FREERTOS_SOURCES}
     ${TINYUSB_SOURCES}
@@ -95,9 +117,24 @@ set(SOURCE_FILES
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
     )
 
+
+
+set(
+    HAL_INCLUDE
+    ${CMAKE_CURRENT_SOURCE_DIR}/config
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal/utils/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/pm/
+    ${CMAKE_CURRENT_SOURCE_DIR}/hri
+    ${CMAKE_CURRENT_SOURCE_DIR}/hpl/port
+
+)
+
 set(DEPEN_DIR
+     ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${CMAKE_CURRENT_SOURCE_DIR}/
-    ${CMAKE_CURRENT_SOURCE_DIR}/driver
+    ${HAL_INCLUDE}
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
@@ -131,6 +168,17 @@ set(CFLAGS
     -g${DEBUG_FLAGS}
     -${OPTIMIZATION_FLAGS}
     -mlong-calls
+-specs=nano.specs
+-specs=nosys.specs
+#     -flto
+
+#    -mabi=aapcs
+      -nostartfiles
+     -DCONF_DFLL_OVERWRITE_CALIBRATION=0
+    -DCFG_TUSB_MCU=OPT_MCU_SAMD21
+
+
+
 
     )
 
@@ -150,6 +198,8 @@ target_include_directories(
 )
 target_compile_definitions(project_lib PRIVATE
         -DDEBUG
+          -DCONF_DFLL_OVERWRITE_CALIBRATION=0
+          -DCFG_TUSB_MCU=OPT_MCU_SAMD21
         -D__SAMD21G18A__
     )
 target_link_libraries(project_lib PRIVATE
