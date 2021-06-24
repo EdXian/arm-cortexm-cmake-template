@@ -13,7 +13,7 @@ set(CMAKE_C_STANDARD 99)
 enable_language(ASM)
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
-set(USE_TINYUSB OFF CACHE BOOL "True if use tinyusb")
+set(USE_TINYUSB ON CACHE BOOL "True if use tinyusb")
 
 
 message_color(Green "ARM_C_COMPILER : ${CMAKE_C_COMPILER}")
@@ -114,11 +114,11 @@ set(SOURCE_FILES
     ${SYSTEM_FILE}
     ${USB_SOURCES}
     #${RTT_SOURCES}
-    #${FREERTOS_SOURCES}
-    #${TINYUSB_SOURCES}
-    #${DRIVE_SOURCE_FILE}
-    #${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
-    #${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+    ${FREERTOS_SOURCES}
+    ${TINYUSB_SOURCES}
+
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
     )
 
 
@@ -153,10 +153,10 @@ set(DEPEN_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${HAL_INCLUDE}
-#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
-#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
-#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
-#    ${TINYUSB_INCLUDE_PATH}
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
+    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
+    ${TINYUSB_INCLUDE_PATH}
 #    ${THIRDPARTY_ROOT_PATH}/RTT/Config
 #    ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER
 
@@ -207,32 +207,17 @@ set(LDFLAGS
     -Wl,--gc-sections
 )
 
-#add_library(project_lib STATIC ${SOURCE_FILES})
-#target_include_directories(
-#    project_lib PRIVATE
-#    ${DEPEN_DIR}
-#)
-#target_compile_definitions(project_lib PRIVATE
-#        -DDEBUG
-#          -DCONF_DFLL_OVERWRITE_CALIBRATION=0
-#          -DCFG_TUSB_MCU=OPT_MCU_SAMD21
-#        -D__SAMD21G18A__
-#    )
-#target_link_libraries(project_lib PRIVATE
-#    m
-#    )
-
-#target_compile_options(project_lib PRIVATE
-#    ${CFLAGS}
-#)
-
 
 
 add_executable(${PROJECT_NAME}
     usb_cdc_echo_main.c
-    driver_init.c
+    freertos_hook.c
+    msc_disk.c
+    usb_descriptor.c
+
     atmel_start.c
     usb_start.c
+    driver_init.c
     ${SOURCE_FILES}
     )
 
@@ -270,9 +255,9 @@ target_link_libraries(
 )
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/main")
-#generate_jlink_basic_cmd("ATSAMD21G18A")
-#generate_output_file("${PROJECT_NAME}")
-#generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x00000000")
-#install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
+generate_jlink_basic_cmd("ATSAMD21G18A")
+generate_output_file("${PROJECT_NAME}")
+generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x00000000")
+install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
 #generate_uf2_file(${PROJECT_NAME} "0x00000000")
 

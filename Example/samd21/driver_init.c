@@ -106,7 +106,7 @@ void TARGET_USB_CLOCK_init(void)
 
 	_pm_enable_bus_clock(PM_BUS_APBB, USB);
 	_pm_enable_bus_clock(PM_BUS_AHB, USB);
-	_gclk_enable_channel(USB_GCLK_ID, CONF_GCLK_USB_SRC);
+    _gclk_enable_channel(USB_GCLK_ID, GCLK_CLKCTRL_GEN_GCLK0_Val);
 }
 
 void TARGET_USB_init(void)

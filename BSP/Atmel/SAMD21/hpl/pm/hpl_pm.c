@@ -70,6 +70,7 @@ int32_t _set_sleep_mode(const uint8_t mode)
  */
 void _pm_init(void)
 {
+
 	hri_pm_set_CPUSEL_CPUDIV_bf(PM, CONF_CPU_DIV);
 	hri_pm_set_APBASEL_APBADIV_bf(PM, CONF_APBA_DIV);
 	hri_pm_set_APBBSEL_APBBDIV_bf(PM, CONF_APBB_DIV);
