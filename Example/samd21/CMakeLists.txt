@@ -37,7 +37,10 @@ if(USE_TINYUSB)
     file(GLOB TINYUSB_DEVICE_SOURCES ${TINYUSB_PATH}/src/device/*.c)
     set(TINYUSB_PORTABLE_SOURCES ${TINYUSB_PATH}/src/portable/microchip/samd/dcd_samd.c)
 
-    set(TINYUSB_INCLUDE_PATH  ${TINYUSB_PATH}/src)
+    set(TINYUSB_INCLUDE_PATH
+        ${TINYUSB_PATH}/src
+        ${TINYUSB_PATH}/hw/bsp
+        )
 
     set(TINYUSB_SOURCES
         ${TINYUSB_CDC_SOURCES}
@@ -46,6 +49,7 @@ if(USE_TINYUSB)
         ${TINYUSB_DEVICE_SOURCES}
         ${TINYUSB_PORTABLE_SOURCES}
         ${TINYUSB_PATH}/src/tusb.c
+        ${TINYUSB_PATH}/hw/bsp/board.c
         )
 
 endif(USE_TINYUSB)
@@ -114,11 +118,11 @@ set(SOURCE_FILES
     ${SYSTEM_FILE}
     ${USB_SOURCES}
     #${RTT_SOURCES}
-    ${FREERTOS_SOURCES}
+#    ${FREERTOS_SOURCES}
     ${TINYUSB_SOURCES}
 
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
     )
 
 
@@ -153,9 +157,9 @@ set(DEPEN_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${HAL_INCLUDE}
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
     ${TINYUSB_INCLUDE_PATH}
 #    ${THIRDPARTY_ROOT_PATH}/RTT/Config
 #    ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER
@@ -211,13 +215,13 @@ set(LDFLAGS
 
 add_executable(${PROJECT_NAME}
     usb_cdc_echo_main.c
-    freertos_hook.c
+#    freertos_hook.c
     msc_disk.c
-    usb_descriptor.c
-
-    atmel_start.c
-    usb_start.c
-    driver_init.c
+    usb_descriptors.c
+    family.c
+#    atmel_start.c
+#    usb_start.c
+#    driver_init.c
     ${SOURCE_FILES}
     )
 
@@ -230,6 +234,7 @@ target_include_directories(
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
         -DDEBUG
+        -DCFG_TUSB_MCU=OPT_MCU_SAMD21
         -D__SAMD21G18A__
     )
 

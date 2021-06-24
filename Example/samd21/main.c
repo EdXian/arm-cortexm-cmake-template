@@ -1,48 +1,49 @@
-#include "board.h"
-
-#include"tusb_config.h"
-#include "atmel_start.h"
-#include "atmel_start_pins.h"
-#include "hal_gpio.h"
-#include "hal_init.h"
-#include "hri_nvmctrl_d21.h"
-
-#include "hpl_gclk_base.h"
-#include "hpl_pm_config.h"
-#include "hpl_pm_base.h"
-#include "hpl_pm_config.h"
+/* 
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2019 Ha Thach (tinyusb.org)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+#include "bsp/board.h"
 #include "tusb.h"
 
+//--------------------------------------------------------------------+
+// MACRO CONSTANT TYPEDEF PROTYPES
+//--------------------------------------------------------------------+
+
+/* Blink pattern
+ * - 250 ms  : device not mounted
+ * - 1000 ms : device mounted
+ * - 2500 ms : device is suspended
+ */
 enum  {
   BLINK_NOT_MOUNTED = 250,
   BLINK_MOUNTED = 1000,
   BLINK_SUSPENDED = 2500,
 };
-
-void USB_Handler(void)
-{
-     gpio_toggle_pin_level(PIN_PA17);
-  tud_int_handler(0);
-} //redefined in hpl_usb.c
-
-
-
-#define CONF_CPU_FREQUENCY 48000000
-
-volatile uint32_t system_ticks = 0;
-void SysTick_Handler (void)
-{
-  system_ticks++;
-  if(system_ticks %1000 ==0){
-      tud_cdc_write("Hello\n", 6);
-      tud_cdc_write_flush();
-  }
-}
 
 static uint32_t blink_interval_ms = BLINK_NOT_MOUNTED;
 
@@ -54,15 +55,9 @@ int main(void)
 {
   board_init();
   tusb_init();
-  SysTick_Config(48000);
-  NVIC_EnableIRQ(USB_IRQn);
-  NVIC_SetPriority(USB_IRQn,3);
-  gpio_set_pin_direction(PIN_PA17,GPIO_DIRECTION_OUT);
-  //gpio_set_pin_pull_mode(PIN_PA17,GPIO_PULL_UP);
 
   while (1)
   {
-
     tud_task(); // tinyusb device task
     led_blinking_task();
 
@@ -114,24 +109,20 @@ void cdc_task(void)
   // if ( tud_cdc_connected() )
   {
     // connected and there are data available
-    //if ( tud_cdc_available() )
+    if ( tud_cdc_available() )
     {
       // read datas
-//      char buf[64];
-//      uint32_t count = tud_cdc_read(buf, sizeof(buf));
-//      (void) count;
+      char buf[64];
+      uint32_t count = tud_cdc_read(buf, sizeof(buf));
+      (void) count;
 
       // Echo back
       // Note: Skip echo by commenting out write() and write_flush()
       // for throughput test e.g
       //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
-
-
-//         delay_ms(10);
+      tud_cdc_write(buf, count);
+      tud_cdc_write_flush();
     }
-
-
-
   }
 }
 
@@ -165,10 +156,10 @@ void led_blinking_task(void)
   static uint32_t start_ms = 0;
   static bool led_state = false;
 
-  //Blink every interval ms
-  //if ( board_millis() - start_ms < blink_interval_ms) return; // not enough time
+  // Blink every interval ms
+  if ( board_millis() - start_ms < blink_interval_ms) return; // not enough time
   start_ms += blink_interval_ms;
 
-  //board_led_write(led_state);
-  //led_state = 1 - led_state; // toggle
+  board_led_write(led_state);
+  led_state = 1 - led_state; // toggle
 }

@@ -1,3 +1,28 @@
+/* 
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2019 Ha Thach (tinyusb.org)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ */
+
 #include "tusb.h"
 
 /* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
@@ -79,6 +104,18 @@ enum
   #define EPNUM_MSC_OUT     0x04
   #define EPNUM_MSC_IN      0x85
 
+#elif CFG_TUSB_MCU == OPT_MCU_CXD56
+  // CXD56 doesn't support a same endpoint number with different direction IN and OUT
+  //    e.g EP1 OUT & EP1 IN cannot exist together
+  // CXD56 USB driver has fixed endpoint type (bulk/interrupt/iso) and direction (IN/OUT) by its number
+  // 0 control (IN/OUT), 1 Bulk (IN), 2 Bulk (OUT), 3 In (IN), 4 Bulk (IN), 5 Bulk (OUT), 6 In (IN)
+  #define EPNUM_CDC_NOTIF   0x83
+  #define EPNUM_CDC_OUT     0x02
+  #define EPNUM_CDC_IN      0x81
+
+  #define EPNUM_MSC_OUT     0x05
+  #define EPNUM_MSC_IN      0x84
+
 #else
   #define EPNUM_CDC_NOTIF   0x81
   #define EPNUM_CDC_OUT     0x02
@@ -115,6 +152,7 @@ uint8_t const desc_hs_configuration[] =
 };
 #endif
 
+
 // Invoked when received GET CONFIGURATION DESCRIPTOR
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
@@ -138,8 +176,8 @@ uint8_t const * tud_descriptor_configuration_cb(uint8_t index)
 char const* string_desc_arr [] =
 {
   (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-  "TinyUSB",                     // 1: Manufacturer
-  "TinyUSB Device",              // 2: Product
+  "SAMD21",                     // 1: Manufacturer
+  "Xiao",              // 2: Product
   "123456",                      // 3: Serials, should use chip ID
   "TinyUSB CDC",                 // 4: CDC Interface
   "TinyUSB MSC",                 // 5: MSC Interface
