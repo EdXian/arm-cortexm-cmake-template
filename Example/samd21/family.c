@@ -244,8 +244,8 @@ void board_init(void)
   TCC0->CC[3].bit.CC = 48000000 / 2000;
   TCC0->CTRLA.bit.ENABLE = true;
 
-//  gpio_set_pin_function(PIN_PA04, PINMUX_PA04E_TCC0_WO0);
-//  _gclk_enable_channel(TCC0_GCLK_ID, GCLK_CLKCTRL_GEN_GCLK0_Val);
+  gpio_set_pin_function(PIN_PA04, PINMUX_PA04E_TCC0_WO0);
+  _gclk_enable_channel(TCC0_GCLK_ID, GCLK_CLKCTRL_GEN_GCLK0_Val);
 
 
 }

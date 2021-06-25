@@ -17,6 +17,12 @@
 #include <string.h>
 
 #include "tusb.h"
+#include "mavlink.h"
+#include "uart.h"
+#include "spi.h"
+
+mavlink_heartbeat_t pack;
+mavlink_message_t msg;
 
 enum  {
   BLINK_NOT_MOUNTED = 250,
@@ -35,11 +41,17 @@ void USB_Handler(void)
 #define CONF_CPU_FREQUENCY 48000000
 
 volatile uint32_t system_ticks = 0;
+uint16_t byte_num = 0;
 void SysTick_Handler (void)
 {
   system_ticks++;
   if(system_ticks %1000 ==0){
-      tud_cdc_write("Hello\n", 6);
+      pack.custom_mode=0x55;
+      pack.mavlink_version=0xaa;
+      pack.base_mode = 0x63;
+      pack.type = 0x07;
+      byte_num = mavlink_msg_heartbeat_encode(1,1,&msg,&pack);
+      tud_cdc_write(&msg, byte_num);
       tud_cdc_write_flush();
   }
 }
@@ -60,6 +72,16 @@ int main(void)
   gpio_set_pin_direction(PIN_PA17,GPIO_DIRECTION_OUT);
   //gpio_set_pin_pull_mode(PIN_PA17,GPIO_PULL_UP);
 
+
+    spi_clock_init();
+    spi_init();
+
+    uart_clock_init(SERCOM4);
+    uart_basic_init(SERCOM4,50834,UART_RX_PAD1_TX_PAD0);
+    //PA05
+    //PA06
+    //PA07
+
   while (1)
   {
 
@@ -67,6 +89,9 @@ int main(void)
     led_blinking_task();
 
     cdc_task();
+    uart_write_byte(SERCOM4,0xaa);
+    spiSend(0xaa);
+    delay_ms(20);
   }
 
   return 0;

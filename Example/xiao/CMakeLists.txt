@@ -110,11 +110,11 @@ set(SOURCE_FILES
 
     ${HAL_SOURCES}
     ${RTT_SOURCES}
-    ${FREERTOS_SOURCES}
-    ${TINYUSB_SOURCES}
+#    ${FREERTOS_SOURCES}
+#    ${TINYUSB_SOURCES}
     ${DRIVE_SOURCE_FILE}
-     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+#     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
     )
 
 
@@ -135,10 +135,10 @@ set(DEPEN_DIR
      ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${HAL_INCLUDE}
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
-    ${TINYUSB_INCLUDE_PATH}
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
+#    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
+#    ${TINYUSB_INCLUDE_PATH}
     ${THIRDPARTY_ROOT_PATH}/RTT/Config
     ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER
 
@@ -212,7 +212,12 @@ target_compile_options(project_lib PRIVATE
 
 
 
-add_executable(${PROJECT_NAME}  main.c freertos_hook.c msc_disk.c usb_descriptor.c ${SOURCE_FILES})
+add_executable(${PROJECT_NAME}  main.c
+                #freertos_hook.c
+                #msc_disk.c
+                #usb_descriptor.c
+                ${SOURCE_FILES}
+    )
 
 
 
