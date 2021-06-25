@@ -73,11 +73,11 @@ int main(void)
   //gpio_set_pin_pull_mode(PIN_PA17,GPIO_PULL_UP);
 
 
-    spi_clock_init();
-    spi_init();
+//    spi_clock_init();
+//    spi_init();
 
-    uart_clock_init(SERCOM4);
-    uart_basic_init(SERCOM4,50834,UART_RX_PAD1_TX_PAD0);
+//    uart_clock_init(SERCOM4);
+//    uart_basic_init(SERCOM4,50834,UART_RX_PAD1_TX_PAD0);
     //PA05
     //PA06
     //PA07
@@ -89,9 +89,9 @@ int main(void)
     led_blinking_task();
 
     cdc_task();
-    uart_write_byte(SERCOM4,0xaa);
-    spiSend(0xaa);
-    delay_ms(20);
+//    uart_write_byte(SERCOM4,0xaa);
+//    spiSend(0xaa);
+//    delay_ms(20);
   }
 
   return 0;
