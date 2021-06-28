@@ -13,11 +13,11 @@
 //#define GPIO_MAP_SS    PORT_PA13 // PA13 bit position macro (1<<13)
 
 
-#define GPIO_MAP_SS						PORT_PA13
-#define GPIO_MAP_LED					PORT_PB30
-#define GPIO_MAP_MISO					PORT_PB16
-#define GPIO_MAP_MOSI					PORT_PB22
-#define GPIO_MAP_SCK					PORT_PB23
+#define GPIO_MAP_SS						PORT_PA10
+#define GPIO_MAP_LED					PORT_PA17
+#define GPIO_MAP_MISO					PORT_PA05
+#define GPIO_MAP_MOSI					PORT_PA06
+#define GPIO_MAP_SCK					PORT_PA07
 
 #define GPIO_GROUP_SS					0
 #define GPIO_GROUP_LED					1

@@ -90,8 +90,8 @@ void uart_basic_init(Sercom *sercom, uint16_t baud_val, enum uart_pad_settings p
     sercom->USART.CTRLB.reg =
         SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN | SERCOM_USART_CTRLB_CHSIZE(0);
     /* Load the baud value */
-    uint16_t baud;
-    baud = calculate_baud_value(baud_val,48000000,USART_SAMPLE_NUM);
+//    uint16_t baud;
+//    baud = calculate_baud_value(baud_val,48000000,USART_SAMPLE_NUM);
 
 
     //9600
@@ -175,8 +175,8 @@ static inline void pin_set_peripheral_function(uint32_t pinmux)
 }
 
 void uart_clock_init(Sercom *sercom){
-        uint32_t port;
-        uint8_t pin;
+//        uint32_t port;
+//        uint8_t pin;
 
     //PB08 UART_Tx SCOM4PAD0
     //PB09 UART_Rx SCOM4PAD1

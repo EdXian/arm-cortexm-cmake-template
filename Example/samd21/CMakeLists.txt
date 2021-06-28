@@ -114,6 +114,9 @@ set(
 set(DRIVER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/spi.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/i2c.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/dma.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/flash.c
     )
 
 
@@ -159,7 +162,7 @@ set(
 
 set(MAVLINK_INCLUDE
 
-    ${CMAKE_SOURCE_DIR}/serial/minimal
+    #${CMAKE_SOURCE_DIR}/serial/minimal
 
     )
 
@@ -281,3 +284,4 @@ generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x0000
 install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
 #generate_uf2_file(${PROJECT_NAME} "0x00000000")
 
+#add_subdirectory(example)

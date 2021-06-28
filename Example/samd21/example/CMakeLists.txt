@@ -6,7 +6,7 @@ message_color(Red test_project)
 foreach(file ${TEST_FILES})
     get_filename_component(barefile ${file} NAME_WE)
     message_color(Yellow testfile->${barefile})
-    add_executable(${barefile} ${file} ${SOURCE_FILES})
+    add_executable(${barefile} ${file} ${SOURCE_FILES} ${DRIVER_FILES})
     target_include_directories(${barefile} PUBLIC ${DEPEN_DIR})
 
     target_compile_definitions(${barefile} PUBLIC

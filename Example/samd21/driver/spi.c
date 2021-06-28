@@ -1,6 +1,6 @@
 
 #include "spi.h"
-
+#include "hal_gpio.h"
 static void pin_set_peripheral_function(uint32_t pinmux)
 {
  uint8_t port = (uint8_t)((pinmux >> 16)/32);
@@ -48,6 +48,10 @@ void spi_init(){
     pin_set_peripheral_function(PINMUX_PA06D_SERCOM0_PAD2);  //mosi  DO
     pin_set_peripheral_function(PINMUX_PA07D_SERCOM0_PAD3);  //sclk  clock
 
+
+    gpio_set_pin_direction(PORT_PA10,GPIO_DIRECTION_OUT);
+
+    //PORT_PA10
     PM->APBCMASK.reg |= PM_APBCMASK_SERCOM0;								//Enable the SERCOM 5 under the PM
     GCLK_CLKCTRL_Type clkctrl = {0};
     uint16_t temp;
@@ -92,7 +96,7 @@ void spi_interrupt_enalbe(){
 
 void spi_set_baudrate(uint32_t rate){
 
-
+//gpio_set_pin_level(PORT_PA10,0);
 // Calculate BAUD value
 uint16_t BAUD_REG = ((float)SPI_CLK_FREQ / (float)(2 * rate)) - 1;
 
@@ -104,5 +108,5 @@ SERCOM5->SPI.CTRLA.reg |= SERCOM_SPI_CTRLA_ENABLE;
 
 // What for synchronization of SERCOM SPI registersbwtween the clock domains
 while(SERCOM5->SPI.SYNCBUSY.bit.ENABLE);
-
+//gpio_set_pin_level(PORT_PA10,1);
 }
