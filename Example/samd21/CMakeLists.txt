@@ -117,6 +117,7 @@ set(DRIVER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/i2c.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/dma.c
     ${CMAKE_CURRENT_SOURCE_DIR}/driver/flash.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/clock.c
     )
 
 

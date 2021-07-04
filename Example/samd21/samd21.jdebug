@@ -4,8 +4,8 @@
 *                         www.segger.com                             *
 **********************************************************************
 
-File          : C:/Users/Ed/Desktop/arm-cortexm-cmake-template/Example/samd21/xiao.jdebug
-Created       : 26 Jun 2021 09:31
+File          : C:/Users/Ed/Desktop/arm-cortexm-cmake-template/Example/samd21/samd21.jdebug
+Created       : 2 Jul 2021 22:47
 Ozone Version : V3.22e
 */
 
@@ -24,15 +24,11 @@ void OnProjectLoad (void) {
   //
   Project.AddPathSubstitute ("C:/Users/Ed/Desktop/arm-cortexm-cmake-template/Example/samd21", "$(ProjectDir)");
   Project.AddPathSubstitute ("c:/users/ed/desktop/arm-cortexm-cmake-template/example/samd21", "$(ProjectDir)");
-  Project.SetDevice ("ATSAMD21G18");
-  Project.SetHostIF ("USB", "");
-  Project.SetTargetIF ("SWD");
-  Project.SetTIFSpeed ("4 MHz");
-  Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M0.svd");
   //
   // User settings
   //
   File.Open ("$(ProjectDir)/build/samd21.elf");
+
 }
 
 /*********************************************************************
@@ -112,8 +108,9 @@ void OnProjectLoad (void) {
 **
 **********************************************************************
 */
-//void AfterTargetReset (void) {
-//}
+void AfterTargetReset (void) {
+  _SetupTarget();
+}
 
 /*********************************************************************
 *
@@ -197,8 +194,9 @@ void OnProjectLoad (void) {
 *
 **********************************************************************
 */
-//void AfterTargetDownload (void) {
-//}
+void AfterTargetDownload (void) {
+  _SetupTarget();
+}
 
 /*********************************************************************
 *
@@ -296,3 +294,39 @@ void OnProjectLoad (void) {
 */
 //void OnError (void) {
 //}
+
+/*********************************************************************
+*
+*       _SetupTarget
+*
+* Function description
+*   Setup the target.
+*   Called by AfterTargetReset() and AfterTargetDownload().
+*
+*   Auto-generated function. May be overridden by Ozone.
+*
+**********************************************************************
+*/
+void _SetupTarget(void) {
+  unsigned int SP;
+  unsigned int PC;
+  unsigned int VectorTableAddr;
+
+  VectorTableAddr = Elf.GetBaseAddr();
+  //
+  // Set up initial stack pointer
+  //
+  SP = Target.ReadU32(VectorTableAddr);
+  if (SP != 0xFFFFFFFF) {
+    Target.SetReg("SP", SP);
+  }
+  //
+  // Set up entry point PC
+  //
+  PC = Elf.GetEntryPointPC();
+  if (PC != 0xFFFFFFFF) {
+    Target.SetReg("PC", PC);
+  } else {
+    Util.Error("Project script error: failed to set up entry point PC", 1);
+  }
+}
