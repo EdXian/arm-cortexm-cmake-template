@@ -1,0 +1,7 @@
+device ATSAME51J20A
+h
+loadbin BMW_SEAT.bin, 0x00000000
+verifybin BMW_SEAT.bin, 0x00000000
+r
+g
+qc

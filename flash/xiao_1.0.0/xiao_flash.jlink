@@ -1,7 +1,0 @@
-device ATSAMD21G18A
-h
-loadbin xiao.bin, 0x00002000
-verifybin xiao.bin, 0x00002000
-r
-g
-qc
