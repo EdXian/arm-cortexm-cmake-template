@@ -11,6 +11,7 @@ void dma_clock_init(){
 }
 
 void dma_start_transaction(uint8_t ch){
+
     DMAC->CHID.bit.ID=DMAC_CHID_ID(ch);
     DMAC->CHCTRLA.bit.ENABLE=1;
     DMAC->SWTRIGCTRL.reg |= DMAC_SWTRIGCTRL_SWTRIG0;
