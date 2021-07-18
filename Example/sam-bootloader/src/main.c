@@ -150,6 +150,10 @@ static void check_start_application(void) {
 extern char _etext;
 extern char _end;
 
+
+
+uint8_t data_[65];
+uint32_t length_;
 /**
  *  \brief SAMD21 SAM-BA Main loop.
  *  \return Unused (ANSI-C compatibility).
@@ -224,7 +228,13 @@ int main(void) {
             logmsg("entering monitor loop");
             // SAM-BA on USB loop
             while (1) {
-                sam_ba_monitor_run();
+                process_msc();
+                length_ = cdc_read_buf(data_, 64);
+                data_[length_] = 0;
+                if(length_){
+                  cdc_write_buf(data_, length_);
+                }
+               // sam_ba_monitor_run();
             }
         }
 #if USE_UART

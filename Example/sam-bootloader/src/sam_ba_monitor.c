@@ -133,7 +133,7 @@ void sam_ba_monitor_run(void) {
     // Start waiting some cmd
     while (1) {
         process_msc();
-        length = cdc_read_buf(data, SIZEBUFMAX);
+        length = cdc_read_buf(data, SIZEBUFMAX);//SIZEBUFMAX
         data[length] = 0;
         if (length) {
             logwrite("SERIAL:");
