@@ -2,7 +2,7 @@
 #include "hal_gpio.h"
 #include "hal_init.h"
 #include "hri_nvmctrl_d21.h"
-#include "hpl/gclk/hpl_gclk_base.h"
+
 
 #include "hpl_pm_config.h"
 #include "hpl_pm_base.h"

@@ -111,12 +111,22 @@ set(
     )
 
 
+set(DRIVER_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/spi.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/i2c.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/dma.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/flash.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver/clock.c
+    )
+
 
 set(SOURCE_FILES
     ${STARTUP_FILE}
     ${HAL_SOURCES}
     ${SYSTEM_FILE}
     ${USB_SOURCES}
+    ${DRIVER_FILES}
     #${RTT_SOURCES}
  #   ${FREERTOS_SOURCES}
     ${TINYUSB_SOURCES}
@@ -151,11 +161,20 @@ set(
 
 )
 
+set(MAVLINK_INCLUDE
+
+    #${CMAKE_SOURCE_DIR}/serial/minimal
+
+    )
+
+
+
 set(DEPEN_DIR
 
 
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}/driver
     ${HAL_INCLUDE}
 #    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
 #    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source
@@ -163,7 +182,7 @@ set(DEPEN_DIR
     ${TINYUSB_INCLUDE_PATH}
 #    ${THIRDPARTY_ROOT_PATH}/RTT/Config
 #    ${THIRDPARTY_ROOT_PATH}/RTT/SEGGER
-
+    ${MAVLINK_INCLUDE}
     ${CMSIS_PATH}/
 
 
@@ -266,3 +285,4 @@ generate_jlink_cmd(${PROJECT_NAME}  "ATSAMD21G18A" "${PROJECT_NAME}.bin" "0x0000
 install_output_file("${PROJECT_NAME}" ${CMAKE_PROJECT_VERSION})
 #generate_uf2_file(${PROJECT_NAME} "0x00000000")
 
+#add_subdirectory(example)
