@@ -6,7 +6,7 @@ include(utils)
 
 find_package (Python COMPONENTS Interpreter Development)
 
-message_color(Yellow ${Python_VERSION})
+
 function(generate_uf2_file project_name app_start_address)
 
     message_color(Red "generate ${CMAKE_CURRENT_BINARY_DIR}/${project_name}.uf2")
@@ -31,5 +31,3 @@ add_custom_target(
 #        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${project_name}.bin
 #)
 endfunction(generate_uf2_file)
-
-

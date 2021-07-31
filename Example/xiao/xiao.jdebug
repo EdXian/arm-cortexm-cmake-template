@@ -22,12 +22,12 @@ void OnProjectLoad (void) {
   //
   // Dialog-generated settings
   //
-  Project.AddPathSubstitute ("/home/rtthread/arm-cortexm-cmake-template/Example/xiao", "$(ProjectDir)");
-  Project.AddPathSubstitute ("/home/rtthread/arm-cortexm-cmake-template/example/xiao", "$(ProjectDir)");
   Project.SetDevice ("ATSAMD21G18");
   Project.SetHostIF ("USB", "");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
+  Project.AddPathSubstitute ("/home/rtthread/arm-cortexm-cmake-template/Example/xiao", "$(ProjectDir)");
+  Project.AddPathSubstitute ("/home/rtthread/arm-cortexm-cmake-template/example/xiao", "$(ProjectDir)");
   Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M0.svd");
   Project.AddSvdFile ("$(ProjectDir)/../../BSP/Atmel/SAMD21/samd21a/svd/ATSAMD21G18A.svd");
   //
