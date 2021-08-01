@@ -32,7 +32,7 @@
 #include "timers.h"
 #include "queue.h"
 #include "semphr.h"
-
+#include "math.h"
 #include "bsp/board.h"
 #include "tusb.h"
 
@@ -166,6 +166,10 @@ void cdc_task(void* params)
   (void) params;
 
   // RTOS forever loop
+    uint8_t buf[64]="test\n";
+    float v;
+    uint32_t count=0;
+    int32_t val;
   while ( 1 )
   {
     // connected() check for DTR bit
@@ -173,21 +177,30 @@ void cdc_task(void* params)
     // if ( tud_cdc_connected() )
     {
       // There are data available
-      if ( tud_cdc_available() )
-      {
-        uint8_t buf[64];
+//      if ( tud_cdc_available() )
+//      {
+//
 
-        // read and echo back
-        uint32_t count = tud_cdc_read(buf, sizeof(buf));
-        (void) count;
-       // sprintf(buf,"test\n");
-        // Echo back
-        // Note: Skip echo by commenting out write() and write_flush()
-        // for throughput test e.g
-        //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
-        tud_cdc_write(buf, count);
-        tud_cdc_write_flush();
-      }
+//        // read and echo back
+//        uint32_t count = tud_cdc_read(buf, sizeof(buf));
+//        (void) count;
+//       // sprintf(buf,"test\n");
+//        // Echo back
+//        // Note: Skip echo by commenting out write() and write_flush()
+//        // for throughput test e.g
+//        //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
+//        tud_cdc_write(buf, count);
+//        tud_cdc_write_flush();
+//      }
+          //count++;
+            val =  (int32_t) 1000*cosf(2*3.14*(float)count/20);
+
+          //sprintf(buf,"%d\n",val);
+
+          tud_cdc_write(buf, strlen(buf));
+          tud_cdc_write_flush();
+          vTaskDelay(30);
+
     }
 
     // For ESP32-S2 this delay is essential to allow idle how to run and reset wdt

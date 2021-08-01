@@ -70,13 +70,13 @@ ${CMAKE_CURRENT_SOURCE_DIR}/hw/mcu/microchip/samd21/hal/utils/include
     ${CMAKE_CURRENT_SOURCE_DIR}/hw/mcu/microchip/samd21/hri
     )
 
-set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g ) #-mfloat-abi=soft -mfpu=fpv4-sp-d16
+set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g -mfloat-abi=soft -mfpu=fpv4-sp-d16) #-mfloat-abi=soft -mfpu=fpv4-sp-d16
 set(DEBUG_FLAGS 3)
 set(OPTIMIZATION_FLAGS O0)
 
 
 set(CFLAGS
-    -nostdlib
+#    -nostdlib
     -x c
     -c
     -std=gnu99
@@ -87,16 +87,18 @@ set(CFLAGS
     -g${DEBUG_FLAGS}
     -${OPTIMIZATION_FLAGS}
     -mlong-calls
-    --specs=nano.specs
-    --specs=nosys.specs
+
     -flto
     -mthumb
     -mabi=aapcs
     -mcpu=cortex-m0plus
-    -nostdlib -nostartfiles
+    #-nostdlib
+    -nostartfiles
     -DCONF_DFLL_OVERWRITE_CALIBRATION=0
     -DCFG_TUSB_MCU=OPT_MCU_SAMD21
 
+    --specs=nosys.specs
+     --specs=nano.specs
 
 
 
@@ -107,7 +109,11 @@ set(LDFLAGS
      -T ${CMAKE_CURRENT_SOURCE_DIR}/hw/bsp/samd21/boards/atsamd21_xpro/samd21j18a_flash.ld
     -g${DEBUG_FLAGS}
     ${CPU_FLAGS}
-    --specs=nano.specs
+    #-nostdlib
+
+    -u_printf_float
+    --specs=nosys.specs
+     --specs=nano.specs
     -Wl,--gc-sections
 )
 
@@ -130,7 +136,7 @@ set(SOURCE_FILE
    hw/mcu/microchip/samd21/hpl/sysctrl/hpl_sysctrl.c
    hw/mcu/microchip/samd21/hal/src/hal_atomic.c
 hw/mcu/microchip/samd21/hal/utils/src/utils_assert.c
-
+#hw/mcu/microchip/samd21/hal/utils/src/utils_syscalls.c
    src/tusb.c
            src/common/tusb_fifo.c
            src/device/usbd.c
@@ -194,6 +200,7 @@ target_link_options(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
+    m
 )
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/main")
