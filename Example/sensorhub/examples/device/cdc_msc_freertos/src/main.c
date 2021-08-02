@@ -81,7 +81,11 @@ void cdc_task(void* params);
 //--------------------------------------------------------------------+
 // Main
 //--------------------------------------------------------------------+
-
+void USB_Handler(void)
+{
+  //tud_int_handler(0);
+    dcd_int_handler(0);
+}
 
 //a = signal.firwin(100,[1.6, 31.5],pass_zero=False,fs=256)
 
@@ -116,8 +120,8 @@ float32_t fir_taps[]={
 
 };
 
-float32_t fir_state[100 + 4-1]={0.0f};
-
+float32_t fir_state[103]={0.0f};
+arm_fir_instance_f32 s;
 uint8_t a,b;
 int main(void)
 {
@@ -125,7 +129,7 @@ int main(void)
   // soft timer for blinky
   blinky_tm = xTimerCreateStatic(NULL, pdMS_TO_TICKS(BLINK_NOT_MOUNTED), true, NULL, led_blinky_cb, &blinky_tmdef);
   xTimerStart(blinky_tm, 0);
-
+  arm_fir_init_f32(&s,100,fir_taps,fir_state,4);
   // Create a task for tinyusb device stack
   (void) xTaskCreateStatic( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, usb_device_stack, &usb_device_taskdef);
 
@@ -196,11 +200,27 @@ void tud_resume_cb(void)
   xTimerChangePeriod(blinky_tm, pdMS_TO_TICKS(BLINK_MOUNTED), 0);
 }
 
+#pragma pack(push, 1)
+
+typedef struct sample{
+    uint8_t head;
+    uint8_t len;
+    float a;
+    float b;
+    float c;
+    float d;
+    uint16_t sum;
+}sample_t;
+#pragma pack(pop)
 //--------------------------------------------------------------------+
 // USB CDC
 //--------------------------------------------------------------------+
 int32_t val;
 float v;
+sample_t sample_data;
+sample_t sample_test;
+float32_t a_vector[4];
+float32_t b_vector[4];
 void cdc_task(void* params)
 {
   (void) params;
@@ -223,6 +243,7 @@ void cdc_task(void* params)
         // read and echo back
         uint32_t count = tud_cdc_read(buf, sizeof(buf));
         (void) count;
+        memcpy(a_vector,&buf[2],4*sizeof (float32_t));
        // sprintf(buf,"test\n");
         // Echo back
         // Note: Skip echo by commenting out write() and write_flush()
@@ -235,7 +256,16 @@ void cdc_task(void* params)
         //          tud_cdc_write(buf, strlen(buf));
         //          tud_cdc_write_flush();
         //          vTaskDelay(30);
-        tud_cdc_write(buf, count);
+        memset(&sample_test,0,sizeof (sample_test));
+
+        arm_fir_f32(&s,a_vector,b_vector,4);
+        sample_test.head = 0x55;
+        sample_test.len = 0x12;
+        sample_test.a = b_vector[0];
+        sample_test.b = b_vector[1];
+        sample_test.c = b_vector[2];
+        sample_test.d = b_vector[3];
+        tud_cdc_write(&sample_test, sizeof (sample_test));
         tud_cdc_write_flush();
       }
 
