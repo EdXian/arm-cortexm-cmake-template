@@ -153,7 +153,7 @@ set(DEPEN_DIR
 
 set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g ) #-mfloat-abi=soft -mfpu=fpv4-sp-d16
 set(DEBUG_FLAGS 3)
-set(OPTIMIZATION_FLAGS O0)
+set(OPTIMIZATION_FLAGS O1)
 
 
 set(CFLAGS

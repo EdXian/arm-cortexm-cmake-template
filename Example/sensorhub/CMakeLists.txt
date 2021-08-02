@@ -24,9 +24,11 @@ set(CMSIS_PATH ${THIRDPARTY_ROOT_PATH}/CMSIS_5/CMSIS/Core/Include)
 
 set(DEPEN_DIR
     ${CMSIS_PATH}/
-
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/Include
+    #${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/include
+    #${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel/portable/GCC/ARM_CM0
 
     ${CMAKE_CURRENT_SOURCE_DIR}/hw
     ${CMAKE_CURRENT_SOURCE_DIR}/hw/mcu/microchip/samd21/include
@@ -70,14 +72,15 @@ ${CMAKE_CURRENT_SOURCE_DIR}/hw/mcu/microchip/samd21/hal/utils/include
     ${CMAKE_CURRENT_SOURCE_DIR}/hw/mcu/microchip/samd21/hri
     )
 
-set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g -mfloat-abi=soft -mfpu=fpv4-sp-d16) #-mfloat-abi=soft -mfpu=fpv4-sp-d16
+set(CPU_FLAGS -mthumb -mcpu=cortex-m0plus  -g ) # -mfpu=fpv4-sp-d16
 set(DEBUG_FLAGS 3)
 set(OPTIMIZATION_FLAGS O0)
 
 
 set(CFLAGS
-#    -nostdlib
-    -x c
+    #-nostdlib
+    #-nostdlib
+
     -c
     -std=gnu99
     ${CPU_FLAGS}
@@ -87,18 +90,17 @@ set(CFLAGS
     -g${DEBUG_FLAGS}
     -${OPTIMIZATION_FLAGS}
     -mlong-calls
-
     -flto
-    -mthumb
-    -mabi=aapcs
-    -mcpu=cortex-m0plus
-    #-nostdlib
-    -nostartfiles
+   -mabi=aapcs
+   -mcpu=cortex-m0plus
+-fsingle-precision-constant
+#    #-nostartfiles
     -DCONF_DFLL_OVERWRITE_CALIBRATION=0
     -DCFG_TUSB_MCU=OPT_MCU_SAMD21
+    -DARM_MATH_CM0PLUS
+    -mfloat-abi=soft
+    -mfpu=vfp
 
-    --specs=nosys.specs
-     --specs=nano.specs
 
 
 
@@ -106,22 +108,26 @@ set(CFLAGS
 
 
 set(LDFLAGS
-     -T ${CMAKE_CURRENT_SOURCE_DIR}/hw/bsp/samd21/boards/atsamd21_xpro/samd21j18a_flash.ld
+     -T${BSP_ROOT_PATH}/Atmel/SAMD21/samd21a/gcc/gcc/samd21g18a_flash.ld
     -g${DEBUG_FLAGS}
     ${CPU_FLAGS}
     #-nostdlib
-
-    -u_printf_float
+    #-lc
+    #-u_printf_float
+#    -fsingle-precision-constant
     --specs=nosys.specs
      --specs=nano.specs
     -Wl,--gc-sections
+    -mfloat-abi=soft
+    -mfpu=vfp
 )
 
 file(GLOB   FREERTOS_SOURCE
 
-    ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/*.c
-     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/ARM_CM0/port.c
-     ${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/portable/MemMang/heap_4.c
+   ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel/*.c
+    #${THIRDPARTY_ROOT_PATH}/FreeRTOS/Source/*.c
+     ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel/portable/GCC/ARM_CM0/port.c
+#     ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel/portable/MemMang/heap_4.c
 
     )
 
@@ -200,6 +206,7 @@ target_link_options(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/libarm_cortexM0l_math.a
     m
 )
 
