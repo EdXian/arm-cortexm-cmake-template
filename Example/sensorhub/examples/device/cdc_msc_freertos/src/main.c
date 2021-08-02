@@ -41,7 +41,7 @@
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
 //--------------------------------------------------------------------+
-
+SemaphoreHandle_t usb_rx_semaphore;
 /* Blink pattern
  * - 250 ms  : device not mounted
  * - 1000 ms : device mounted
@@ -123,9 +123,11 @@ float32_t fir_taps[]={
 float32_t fir_state[103]={0.0f};
 arm_fir_instance_f32 s;
 uint8_t a,b;
+StaticSemaphore_t  xSemaphoreBuffer;
 int main(void)
 {
   board_init();
+  usb_rx_semaphore = xSemaphoreCreateBinaryStatic(&xSemaphoreBuffer);
   // soft timer for blinky
   blinky_tm = xTimerCreateStatic(NULL, pdMS_TO_TICKS(BLINK_NOT_MOUNTED), true, NULL, led_blinky_cb, &blinky_tmdef);
   xTimerStart(blinky_tm, 0);
@@ -135,7 +137,7 @@ int main(void)
 
   // Create CDC task
   (void) xTaskCreateStatic( cdc_task, "cdc", CDC_STACK_SZIE, NULL, configMAX_PRIORITIES-2, cdc_stack, &cdc_taskdef);
-
+    NVIC_SetPriority(USB_IRQn,5);
   // skip starting scheduler (and return) for ESP32-S2 or ESP32-S3
 #if CFG_TUSB_MCU != OPT_MCU_ESP32S2 && CFG_TUSB_MCU != OPT_MCU_ESP32S3
   vTaskStartScheduler();
@@ -235,6 +237,7 @@ void cdc_task(void* params)
     // connected() check for DTR bit
     // Most but not all terminal client set this when making connection
     // if ( tud_cdc_connected() )
+    // if(xSemaphoreTake( usb_rx_semaphore, 0xffff ) == pdTRUE )
     {
       // There are data available
       if ( tud_cdc_available() )

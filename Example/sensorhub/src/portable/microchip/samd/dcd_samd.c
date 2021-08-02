@@ -33,7 +33,8 @@
 
 #include "sam.h"
 #include "device/dcd.h"
-
+#include "FreeRTOS.h"
+#include "semphr.h"
 /*------------------------------------------------------------------*/
 /* MACRO TYPEDEF CONSTANT ENUM
  *------------------------------------------------------------------*/
@@ -340,10 +341,11 @@ void maybe_transfer_complete(void) {
   }
 }
 
-
+extern SemaphoreHandle_t usb_rx_semaphore;
 void dcd_int_handler (uint8_t rhport)
 {
   (void) rhport;
+    static  BaseType_t xHigherPriorityTaskWoken;
 
   uint32_t int_status = USB->DEVICE.INTFLAG.reg & USB->DEVICE.INTENSET.reg;
 
@@ -395,6 +397,9 @@ void dcd_int_handler (uint8_t rhport)
   // Handle SETUP packet
   if (USB->DEVICE.DeviceEndpoint[0].EPINTFLAG.bit.RXSTP)
   {
+     xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(usb_rx_semaphore,&xHigherPriorityTaskWoken);
+
     // This copies the data elsewhere so we can reuse the buffer.
     dcd_event_setup_received(0, _setup_packet, true);
 
@@ -402,10 +407,12 @@ void dcd_int_handler (uint8_t rhport)
     // TRCPT0 bit could already be set by previous ZLP OUT Status (not handled until now).
     // Since control status complete event is optional, we can just clear TRCPT0 and skip the status event
     USB->DEVICE.DeviceEndpoint[0].EPINTFLAG.reg = USB_DEVICE_EPINTFLAG_RXSTP | USB_DEVICE_EPINTFLAG_TRCPT0;
+
   }
 
   // Handle complete transfer
   maybe_transfer_complete();
+  portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
 }
 
 #endif
