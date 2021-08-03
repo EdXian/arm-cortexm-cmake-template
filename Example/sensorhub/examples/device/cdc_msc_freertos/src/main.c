@@ -72,7 +72,27 @@ StaticTask_t usb_device_taskdef;
 #define CDC_STACK_SZIE      configMINIMAL_STACK_SIZE
 StackType_t  cdc_stack[CDC_STACK_SZIE];
 StaticTask_t cdc_taskdef;
+int32_t val;
+#pragma pack(push, 1)
 
+typedef struct sample{
+    uint8_t head;
+    uint8_t len;
+    float a;
+    float b;
+    float c;
+    float d;
+    uint16_t sum;
+}sample_t;
+#pragma pack(pop)
+float v;
+sample_t sample_data;
+sample_t sample_test;
+float32_t a_vector[4];
+float32_t b_vector[4];
+float32_t fft_input[128];
+float32_t cfft_input[256];
+float32_t result[128];
 
 void led_blinky_cb(TimerHandle_t xTimer);
 void usb_device_task(void* param);
@@ -123,6 +143,8 @@ float32_t fir_taps[]={
 float32_t fir_state[103]={0.0f};
 arm_fir_instance_f32 s;
 uint8_t a,b;
+arm_cfft_instance_f32 fft_s;
+arm_cfft_radix2_instance_f32 fft;
 StaticSemaphore_t  xSemaphoreBuffer;
 int main(void)
 {
@@ -132,6 +154,8 @@ int main(void)
   blinky_tm = xTimerCreateStatic(NULL, pdMS_TO_TICKS(BLINK_NOT_MOUNTED), true, NULL, led_blinky_cb, &blinky_tmdef);
   xTimerStart(blinky_tm, 0);
   arm_fir_init_f32(&s,100,fir_taps,fir_state,4);
+ // arm_cfft_init_f32(&fft_s,128);
+arm_cfft_radix2_init_f32(&fft, 128, 0, 1);
   // Create a task for tinyusb device stack
   (void) xTaskCreateStatic( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, usb_device_stack, &usb_device_taskdef);
 
@@ -202,27 +226,32 @@ void tud_resume_cb(void)
   xTimerChangePeriod(blinky_tm, pdMS_TO_TICKS(BLINK_MOUNTED), 0);
 }
 
-#pragma pack(push, 1)
 
-typedef struct sample{
-    uint8_t head;
-    uint8_t len;
-    float a;
-    float b;
-    float c;
-    float d;
-    uint16_t sum;
-}sample_t;
-#pragma pack(pop)
 //--------------------------------------------------------------------+
 // USB CDC
 //--------------------------------------------------------------------+
-int32_t val;
-float v;
-sample_t sample_data;
-sample_t sample_test;
-float32_t a_vector[4];
-float32_t b_vector[4];
+void dsp_hamming_window(float32_t data[], float32_t out[], uint32_t window_size) {
+  // the address of data and out should not be equal
+  int i = 0;
+  for (i = 0; i < window_size; i ++) {
+    float32_t ind = 2 * PI * i / ((float32_t) window_size - 1);
+    // float32_t ind =  PIx2 * i / ((float32_t)window_size - 1);
+    // out[i] = data[i]*(0.54347826f - 0.45652173f *arm_cos_f32(ind));   //25.0 / 46.0   21.0 / 46.0
+    data[i] = data[i]*(0.54f - 0.46f *arm_cos_f32(ind));   //25.0 / 46.0   21.0 / 46.0
+    // ( 0.54 - 0.46 * dsp.arm_cos_f32(2*np.pi * i / (n-1)))  python method
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 void cdc_task(void* params)
 {
   (void) params;
@@ -230,11 +259,11 @@ void cdc_task(void* params)
   // RTOS forever loop
     uint8_t buf[64]="test\n";
 
-    uint32_t count=0;
+    uint32_t id=0;
 
   while ( 1 )
   {
-    // connected() check for DTR bit
+    // connected() check fodsp_hamming_windowr DTR bit
     // Most but not all terminal client set this when making connection
     // if ( tud_cdc_connected() )
     // if(xSemaphoreTake( usb_rx_semaphore, 0xffff ) == pdTRUE )
@@ -245,31 +274,63 @@ void cdc_task(void* params)
 
         // read and echo back
         uint32_t count = tud_cdc_read(buf, sizeof(buf));
-        (void) count;
-        memcpy(a_vector,&buf[2],4*sizeof (float32_t));
-       // sprintf(buf,"test\n");
-        // Echo back
-        // Note: Skip echo by commenting out write() and write_flush()
-        // for throughput test e.g
-        //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
-        //        v=3.15f;
-        //          count++;
-        //            val =  (int32_t) 1000*cosf(2*3.14*(float)count/20);
-        //          //sprintf(buf,"%d\n",val);
-        //          tud_cdc_write(buf, strlen(buf));
-        //          tud_cdc_write_flush();
-        //          vTaskDelay(30);
-        memset(&sample_test,0,sizeof (sample_test));
+        switch(buf[0]){
+            case 0x55:
 
-        arm_fir_f32(&s,a_vector,b_vector,4);
-        sample_test.head = 0x55;
-        sample_test.len = 0x12;
-        sample_test.a = b_vector[0];
-        sample_test.b = b_vector[1];
-        sample_test.c = b_vector[2];
-        sample_test.d = b_vector[3];
-        tud_cdc_write(&sample_test, sizeof (sample_test));
-        tud_cdc_write_flush();
+                memcpy(a_vector,&buf[2],4*sizeof (float32_t));
+               // sprintf(buf,"test\n");
+                // Echo back
+                // Note: Skip echo by commenting out write() and write_flush()
+                // for throughput test e.g
+                //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
+                //        v=3.15f;
+                //          count++;
+                //            val =  (int32_t) 1000*cosf(2*3.14*(float)count/20);
+                //          //sprintf(buf,"%d\n",val);
+                //          tud_cdc_write(buf, strlen(buf));
+                //          tud_cdc_write_flush();
+                //          vTaskDelay(30);
+                memset(&sample_test,0,sizeof (sample_test));
+
+                arm_fir_f32(&s,a_vector,b_vector,4);
+                sample_test.head = 0x55;
+                sample_test.len = 0x12;
+                sample_test.a = b_vector[0];
+                sample_test.b = b_vector[1];
+                sample_test.c = b_vector[2];
+                sample_test.d = b_vector[3];
+                memcpy(&fft_input[id*4],&sample_test.a,sizeof (float32_t)*4);
+                tud_cdc_write(&sample_test, sizeof (sample_test));
+                tud_cdc_write_flush();
+
+                if(id==31){
+                    asm("nop");
+                    //dsp_hamming_window(fft_input,NULL,128);
+                    for(uint32_t i=0;i<128;i++){
+                         cfft_input[2*i+0] = fft_input[i];
+                         cfft_input[2*i+1] = 0;
+                    }
+                    arm_cfft_radix2_f32(&fft, cfft_input);
+                    //arm_cfft_f32(&fft_s,fft_input,0,1);
+                    arm_cmplx_mag_f32(cfft_input,result,128);
+
+                    id = 0;
+                }else{
+                   id++;
+                }
+
+
+
+                break;
+
+            case 0x56:
+//                tud_cdc_write(buf, sizeof(buf));
+//                tud_cdc_write_flush();
+                break;
+        }
+
+
+
       }
 
 

@@ -397,8 +397,8 @@ void dcd_int_handler (uint8_t rhport)
   // Handle SETUP packet
   if (USB->DEVICE.DeviceEndpoint[0].EPINTFLAG.bit.RXSTP)
   {
-     xHigherPriorityTaskWoken = pdFALSE;
-    xSemaphoreGiveFromISR(usb_rx_semaphore,&xHigherPriorityTaskWoken);
+     //xHigherPriorityTaskWoken = pdFALSE;
+    //xSemaphoreGiveFromISR(usb_rx_semaphore,&xHigherPriorityTaskWoken);
 
     // This copies the data elsewhere so we can reuse the buffer.
     dcd_event_setup_received(0, _setup_packet, true);
@@ -412,7 +412,7 @@ void dcd_int_handler (uint8_t rhport)
 
   // Handle complete transfer
   maybe_transfer_complete();
-  portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+  //portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
 }
 
 #endif
