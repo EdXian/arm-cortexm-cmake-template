@@ -14,7 +14,7 @@ print("Serial start.")
 import serial
 import struct
 print("Serial start.")
-COM_PORT = '/dev/ttyACM6'
+COM_PORT = '/dev/ttyACM0'
 BAUD_RATES = 115200
 ser = serial.Serial(COM_PORT, BAUD_RATES)
 t = np.arange(128)
@@ -30,7 +30,6 @@ count = 0
 #time.sleep(0.1)
 try:
     for i in range(int(len(sig)/4)):
-        time.sleep(0.05)
         s = struct.pack("<BBffffH",0x55,0x12,sig[count*4+0],sig[count*4+1],sig[count*4+2],sig[count*4+3],0x312)
         ser.write(s)
         data_raw = ser.read(20)
